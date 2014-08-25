@@ -59,7 +59,7 @@ gulp.task('templates', function() {
         .pipe(gulp.dest("build"));
 });
 
-gulp.task('service', ['templates'], function() {
+gulp.task('service', function() {
     gulp.src(['src/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
@@ -91,7 +91,7 @@ gulp.task('e2eTest', function() {
 });
 
 gulp.task('tests', ['e2eTest']);
-gulp.task('build', ['service', 'styles']);
+gulp.task('build', ['templates', 'service', 'styles']);
 gulp.task('deploy', ['build', 'tests']);
 
 gulp.task('default', ['deploy'], function() {});
