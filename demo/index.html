@@ -1,0 +1,98 @@
+<html ng-app="notificationTest">
+    <head>
+        <title>Notification demo</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+        <link rel="stylesheet" href="angular-csp.css">
+        <link rel="stylesheet" href="angular-ui-notification.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Angular ui-notification demo</h1>
+        </div>
+
+        <div ng-controller="notificationController">
+            <div class="container">
+                <h3>Types of notifications</h3>
+                <button class="btn btn-primary" ng-click="primary()">Primary Notification</button>
+                <button class="btn btn-danger" ng-click="error()">Error Notification</button>
+                <button class="btn btn-success" ng-click="success()">Success Notification</button>
+                <button class="btn btn-info" ng-click="info()">Information Notification</button>
+                <button class="btn btn-warning" ng-click="warning()">Warning Notification</button>
+            </div>
+
+            <div class="container">
+                <h3>Notification with title</h3>
+                <button class="btn btn-primary" ng-click="primaryTitle()">Primary Notification</button>
+            </div>
+
+            <div class="container">
+                <h3>Custom show delay</h3>
+                <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
+                <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
+            </div>
+
+            <div class="container">
+                <h3>Using html tags within message and title</h3>
+                <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
+                <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
+            </div>
+        </div>
+
+        <script src="angular.min.js"></script>
+        <script src="angular-ui-notification.min.js"></script>  
+        <script type="text/javascript">
+            angular.module('notificationTest', ['ui-notification']);
+
+            angular.module('notificationTest')
+
+            .controller('notificationController', function($scope, Notification) {
+                
+                $scope.primary = function() {
+                    Notification('Primary notification');
+                };
+
+                $scope.error = function() {
+                    Notification.error('Error notification');
+                };
+
+                $scope.success = function() {
+                    Notification.success('Success notification');
+                };
+
+                $scope.info = function() {
+                    Notification.info('Information notification');
+                };
+
+                $scope.warning = function() {
+                    Notification.warning('Warning notification');
+                };
+
+                // ==
+
+                $scope.primaryTitle = function() {
+                    Notification({message: 'Primary notification', title: 'Primary notification'});
+                };
+
+                // ==
+
+                $scope.errorTime = function() {
+                    Notification.error({message: 'Error notification 1s', delay: 1000});
+                };
+
+                $scope.successTime = function() {
+                    Notification.success({message: 'Success notification 20s', delay: 20000});
+                };
+
+                // ==
+
+                $scope.errorHtml = function() {
+                    Notification.error({message: '<b>Error</b> <s>notification</s>', title: '<i>Html</i> <u>message</u>'});
+                };
+
+                $scope.successHtml = function() {
+                    Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
+                };
+            });
+        </script>
+    </body>
+</html>
