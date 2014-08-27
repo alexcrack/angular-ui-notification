@@ -13,28 +13,36 @@
         <div ng-controller="notificationController">
             <div class="container">
                 <h3>Types of notifications</h3>
-                <button class="btn btn-primary" ng-click="primary()">Primary Notification</button>
-                <button class="btn btn-danger" ng-click="error()">Error Notification</button>
-                <button class="btn btn-success" ng-click="success()">Success Notification</button>
-                <button class="btn btn-info" ng-click="info()">Information Notification</button>
-                <button class="btn btn-warning" ng-click="warning()">Warning Notification</button>
+                <div class="btn-group-vertical">
+                    <button class="btn btn-primary" ng-click="primary()">Primary Notification</button>
+                    <button class="btn btn-danger" ng-click="error()">Error Notification</button>
+                    <button class="btn btn-success" ng-click="success()">Success Notification</button>
+                    <button class="btn btn-info" ng-click="info()">Information Notification</button>
+                    <button class="btn btn-warning" ng-click="warning()">Warning Notification</button>
+                </div>
             </div>
 
             <div class="container">
                 <h3>Notification with title</h3>
-                <button class="btn btn-primary" ng-click="primaryTitle()">Primary Notification</button>
+                <div class="btn-group-vertical">
+                    <button class="btn btn-primary" ng-click="primaryTitle()">Primary Notification</button>
+                </div>
             </div>
 
             <div class="container">
                 <h3>Custom show delay</h3>
-                <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
-                <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
+                <div class="btn-group-vertical">
+                    <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
+                    <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
+                </div>
             </div>
 
             <div class="container">
                 <h3>Using html tags within message and title</h3>
-                <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
-                <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
+                <div class="btn-group-vertical">
+                    <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
+                    <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
+                </div>
             </div>
         </div>
 
