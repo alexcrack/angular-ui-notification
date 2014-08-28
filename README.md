@@ -1,19 +1,19 @@
 angular-ui-notification
 =======================
 
-Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating
+Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animations
 
 ## Features
 - No dependencies except of angular.js
 - CSS3 Animations
 - Small size
 - 5 types of messages
-- HTML messages
+- using HTML tags in the messages
 
 
 ## Using
 
-In you html/template
+In your html/template
 ```html
 ...
   <link rel="stylesheet" href="angular-ui-notification.min.css">
@@ -23,7 +23,7 @@ In you html/template
 
 ```
 
-In you application
+In your application
 
 ```javascript
   angular.module('notificationTest', ['ui-notification']);
