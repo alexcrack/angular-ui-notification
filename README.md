@@ -1,6 +1,9 @@
 angular-ui-notification
 =======================
 
+[![Dependency Status](https://david-dm.org/alexcrack/angular-ui-notification.png)](https://david-dm.org/alexcrack/angular-ui-notification)
+[![devDependency Status](https://david-dm.org/alexcrack/angular-ui-notification/dev-status.png)](https://david-dm.org/alexcrack/angular-ui-notification#info=devDependencies)
+
 Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animations
 
 ## Features
