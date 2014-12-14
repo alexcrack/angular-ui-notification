@@ -14,6 +14,7 @@ Angular.js service providing simple notifications using Bootstrap 3 styles with 
 * Use HTML in your messages.
 
 ## Usage
+ [Heres a plunker demo](http://plnkr.co/edit/5Gk8UVvzUsjyof7Gxsua?p=preview)
 
 #### Install
 
