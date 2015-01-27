@@ -66,6 +66,7 @@ angular.module('ui-notification').factory('Notification', function(
 			var templateElement = $compile(template)(scope);
 			templateElement.addClass(args.type);
 			templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
+				e = e.originalEvent || e;
 				if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 1)){
 					templateElement.remove();
 					messageElements.splice(messageElements.indexOf(templateElement), 1);
