@@ -92,8 +92,8 @@ angular.module('ui-notification').factory('Notification', function(
 		startTop = args.top ? args.top : startTop;
 		verticalSpacing = args.verticalSpacing ? args.verticalSpacing : verticalSpacing;
 	};
-	notify.primary = function() {
-		this(args, '');
+	notify.primary = function(args) {
+		this(args, 'primary');
 	};
 	notify.error = function(args) {
 		this(args, 'error');
