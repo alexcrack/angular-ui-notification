@@ -108,5 +108,15 @@ angular.module('ui-notification').factory('Notification', function(
 		this(args, 'warning');
 	};
 
+	notify.clearAll = function() {
+		var notifys = angular.element(document.getElementsByClassName('ui-notification'));
+
+		if (notifys) {
+			angular.forEach(notifys, function(notify) {
+				notify.remove();
+			});
+		}
+	};
+
 	return notify;
 });
