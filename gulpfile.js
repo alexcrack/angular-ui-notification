@@ -3,7 +3,6 @@ var less = require('gulp-less');
 var csscomb = require('gulp-csscomb');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
-var notify = require('gulp-notify');
 var jshint = require('gulp-jshint');
 var rename = require('gulp-rename');
 var header = require('gulp-header');
@@ -40,8 +39,7 @@ gulp.task('styles', function() {
         }))
         .pipe(header(banner, { pkg : pkg }))
         .pipe(gulp.dest('dist'))
-        .pipe(gulp.dest('demo'))
-        .pipe(notify("Styles '<%= file.relative %>' has been compiled!"));
+        .pipe(gulp.dest('demo'));
 });
 
 // ====== Templates
@@ -77,8 +75,7 @@ gulp.task('service', function() {
         }))
         .pipe(header(banner, { pkg : pkg }))
         .pipe(gulp.dest('dist'))
-        .pipe(gulp.dest('demo'))
-        .pipe(notify("File '<%= file.relative %>' has been compiled!"));
+        .pipe(gulp.dest('demo'));
 });
 
 // ======
