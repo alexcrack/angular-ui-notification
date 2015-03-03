@@ -6,10 +6,11 @@ before_script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
     - npm install --quiet -g gulp
+    - npm install --quiet -g http-server
     - npm install
+    - npm run update-chromedriver
     - npm install --quiet -g bower
-    - mkdir lib
-    - cd lib
-    - bower install bootstrap
+    - bower install
+    - http-server ./demo/ &
 
 script: gulp

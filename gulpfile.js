@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
 var csscomb = require('gulp-csscomb');
-var ngmin = require('gulp-ngmin');
+var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var notify = require('gulp-notify');
 var jshint = require('gulp-jshint');
@@ -64,7 +64,7 @@ gulp.task('service', function() {
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(jshint.reporter('fail'))
-        .pipe(ngmin())
+        .pipe(ngAnnotate())
         .pipe(addsrc('build/*.js'))
         .pipe(order([
             'src/*.js',

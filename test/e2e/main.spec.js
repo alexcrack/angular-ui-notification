@@ -1,7 +1,7 @@
 describe('E2E: main page', function() {
     beforeEach(function() {
         browser.ignoreSynchronization = true;
-        browser.driver.get('file:///mnt/work/PROJECTS/_GITHUB_PROJECTS/angular-ui-notification/demo/index.html');
+        browser.driver.get('http://localhost:8080/index.html');
     });
 
     describe('Buttons exists', function() {

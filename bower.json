@@ -11,7 +11,7 @@
   ],
   "description": "Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating",
   "main": [
-    "dist/angular-ui-notification.min.css", 
+    "dist/angular-ui-notification.min.css",
     "dist/angular-ui-notification.min.js"
   ],
   "keywords": [
@@ -29,5 +29,8 @@
     "tests",
     "demo",
     "build"
-  ]
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.2"
+  }
 }
