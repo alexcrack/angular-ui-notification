@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
+var minifyCSS = require('gulp-minify-css');
 var csscomb = require('gulp-csscomb');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
@@ -30,10 +31,7 @@ gulp.task('styles', function() {
             strictMath: true
         }))
         .pipe(csscomb())
-        .pipe(less({
-            cleancss: true,
-            report: 'gzip'
-        }))
+        .pipe(minifyCSS())
         .pipe(rename({
             suffix: '.min'
         }))
