@@ -24,9 +24,9 @@ Angular.js service providing simple notifications using Bootstrap 3 styles with 
 To install the package using bower and save as a dependency use...
 ```bash
 bower install angular-ui-notification --save
-```  
-  
-In your html/template add 
+```
+
+In your html/template add
 ```html
 ...
   <link rel="stylesheet" href="angular-ui-notification.min.css">
@@ -47,23 +47,34 @@ And when you need to show notifications, inject service and call it!
 
 ```javascript
 angular.module('notificationTest').controller('notificationController', function($scope, Notification) {
- 
+
   Notification.primary('Primary notification');
   // or simply..
   Notification('Primary notification');
-  
+
   // Other Options
   // Success
   Notification.success('Success notification');
-  
+
   // With Title
   Notification({message: 'Primary notification', title: 'Primary notification'});
-  
+
   // Message with custom delay
   Notification.error({message: 'Error notification 1s', delay: 1000});
-  
+
   // Embed HTML within your message.....
   Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
+
+  // Dynamic notification type
+  Notification('Success notification', 'error');
+  Notification('Success notification', 'warning');
+  ...
+
+  // Configuration
+  Notification.config({
+    top: 10,
+    verticalSpacing: 10
+  });
 
 }
 ```
