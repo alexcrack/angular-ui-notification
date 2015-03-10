@@ -73,9 +73,11 @@ angular.module('ui-notification').factory('Notification', function(
 					reposite();
 				}
 			});
-			$timeout(function() {
-				templateElement.addClass('killed');
-			}, args.delay);
+            if (angular.isNumber(args.delay)) {
+                $timeout(function() {
+                    templateElement.addClass('killed');
+                }, args.delay);
+            }
 
 			angular.element(document.getElementsByTagName('body')).append(templateElement);
 			messageElements.push(templateElement);				
