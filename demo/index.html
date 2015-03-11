@@ -33,6 +33,7 @@
                 <h3>Custom show delay</h3>
                 <div class="btn-group-vertical">
                     <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
+                    <button class="btn btn-danger" ng-click="errorNoTime()">Error Notification (no timeout)</button>
                     <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
                 </div>
             </div>
@@ -85,6 +86,9 @@
 
                 $scope.errorTime = function() {
                     Notification.error({message: 'Error notification 1s', delay: 1000});
+                };
+                $scope.errorNoTime = function() {
+                    Notification.error({message: 'Error notification (no timeout)', delay: null});
                 };
 
                 $scope.successTime = function() {
