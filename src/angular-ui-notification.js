@@ -11,6 +11,8 @@ angular.module('ui-notification').factory('Notification', function(
 	var horizontalSpacing = 10;
 	var type = '';
 	var delay = 5000;
+	//var positionY = 'top';
+	//var positionX = 'right';
 
 	var messageElements = [];
 
@@ -54,9 +56,9 @@ angular.module('ui-notification').factory('Notification', function(
 					}
 					var top = lastTop + (j === 0 ? 0 : verticalSpacing);
 					var right = startRight + (k * (horizontalSpacing + elWidth));
-					
-					element.css('top', top + 'px');
-					element.css('right', right + 'px');
+
+					element.css(notify._positionY, top + 'px');
+					element.css(notify._positionX, right + 'px');
 					
 					lastTop = top + elHeight;
 					j ++;
@@ -119,6 +121,9 @@ angular.module('ui-notification').factory('Notification', function(
 			});
 		}
 	};
+
+	notify._positionY = 'top';
+	notify._positionX = 'right';
 
 	return notify;
 });

@@ -55,18 +55,21 @@
             angular.module('notificationTest')
 
             .controller('notificationController', function($scope, Notification) {
+
+                Notification._positionY = 'bottom';
+                Notification._positionX = 'left';
                 
                 $scope.primary = function() {
-                    Notification('Primary notification');
+                    Notification({message: 'Primary notification', delay: 2000});
                 };
 
                 $scope.error = function() {
-                    Notification.error('Error notification');
+                    Notification.error({message: 'Error notification', delay: 5000});
                 };
 
                 $scope.success = function() {
-                    Notification.success('Success notification');
-                };
+                    Notification.success({message: 'Primary notification', delay: 1000});
+                }
 
                 $scope.info = function() {
                     Notification.info('Information notification');
