@@ -45,27 +45,39 @@ angular.module('ui-notification').factory('Notification', function(
 				var k = 0;
 				var lastTop = startTop;
 				var lastRight = startRight;
+				var lastPosition = [];
 				for(var i = messageElements.length - 1; i >= 0; i --) {
-					var element = messageElements[i];
+					var element  = messageElements[i];
 					var elHeight = parseInt(element[0].offsetHeight);
-					var elWidth = parseInt(element[0].offsetWidth);
+					var elWidth  = parseInt(element[0].offsetWidth);
+					var position = lastPosition[element._positionX+element._positionY];
+
+					console.log(element);
+					console.log(position);
+
 					if ((top + elHeight) > window.innerHeight) {
-						lastTop = startTop;
+						position = startTop;
 						k ++;
 						j = 0;
 					}
-					var top = lastTop + (j === 0 ? 0 : verticalSpacing);
-					var right = startRight + (k * (horizontalSpacing + elWidth));
-
-					element.css(notify._positionY, top + 'px');
-					element.css(notify._positionX, right + 'px');
 					
-					lastTop = top + elHeight;
+					var top = (lastTop = position ? position : startTop) + (j === 0 ? 0 : verticalSpacing);
+					var right = startRight + (k * (horizontalSpacing + elWidth));
+					
+					element.css(element._positionX, top + 'px');
+					element.css(element._positionY, right + 'px');
+					
+					lastPosition[element._positionX+element._positionY] = top + elHeight;
+
 					j ++;
 				}
 			};
 
 			var templateElement = $compile(template)(scope);
+			args._positionX = args._positionX ? args._positionX : 'top';
+			args._positionY = args._positionY ? args._positionY : 'right';
+			templateElement._positionX = args._positionX;
+			templateElement._positionY = args._positionY;
 			templateElement.addClass(args.type);
 			templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
 				e = e.originalEvent || e;
@@ -121,9 +133,6 @@ angular.module('ui-notification').factory('Notification', function(
 			});
 		}
 	};
-
-	notify._positionY = 'top';
-	notify._positionX = 'right';
 
 	return notify;
 });
