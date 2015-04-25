@@ -67,5 +67,6 @@ angular.module('notificationTest').controller('notificationController', function
 
   // Change position notification
   Notification.error({message: 'Error Bottom Right', _positionY: 'bottom', _positionX: 'right'});
+  
 }
 ```
