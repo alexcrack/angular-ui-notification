@@ -52,9 +52,6 @@ angular.module('ui-notification').factory('Notification', function(
 					var elWidth  = parseInt(element[0].offsetWidth);
 					var position = lastPosition[element._positionY+element._positionX];
 
-					console.log(element);
-					console.log(position);
-
 					if ((top + elHeight) > window.innerHeight) {
 						position = startTop;
 						k ++;
