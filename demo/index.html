@@ -45,16 +45,6 @@
                     <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
                 </div>
             </div>
-
-            <div class="container">
-                <h3>Change position notification</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-success" ng-click="TopLeft()">Top Left Notification</button>
-                    <button class="btn btn-danger" ng-click="BottomRight()">Bottom Right Notification</button>
-                    <button class="btn btn-warning" ng-click="BottomLeft()">Bottom Left Notification</button>
-                </div>
-            </div>
-
         </div>
 
         <script src="angular.min.js"></script>
@@ -114,21 +104,6 @@
                 $scope.successHtml = function() {
                     Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
                 };
-
-                // ==
-
-                $scope.TopLeft = function() {
-                    Notification.success({message: 'Success Top Left', _positionX: 'left'});
-                };
-
-                $scope.BottomRight = function() {
-                    Notification.error({message: 'Error Bottom Right', _positionY: 'bottom', _positionX: 'right'});
-                };
-
-                $scope.BottomLeft = function() {
-                    Notification.warning({message: 'warning Bottom Left', _positionY: 'bottom', _positionX: 'left'});
-                };
-
             });
         </script>
     </body>
