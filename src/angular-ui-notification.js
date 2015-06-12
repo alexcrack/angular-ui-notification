@@ -22,23 +22,18 @@ angular.module('ui-notification').factory('Notification', function(
 			args = {message:args};
 		}
 
+		args.scope = args.scope ? args.scope : $rootScope;
 		args.template = args.template ? args.template : uiNotificationTemplates;
 		args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
 		args.type = t ? t : '';
 
 		$http.get(args.template,{cache: $templateCache}).success(function(template) {
 
-			var scope = $rootScope.$new();
+			var scope = args.scope.$new();
 			scope.message = $sce.trustAsHtml(args.message);
 			scope.title = $sce.trustAsHtml(args.title);
 			scope.t = args.type.substr(0,1);
 			scope.delay = args.delay;
-
-			if (typeof args.scope === 'object'){
-				for (var key in args.scope){
-					scope[key] = args.scope[key];
-				}
-			}
 
 			var reposite = function() {
 				var j = 0;
