@@ -59,7 +59,7 @@ angular.module('ui-notification').factory('Notification', function(
 					}
 					
 					var top = (lastTop = position ? position : startTop) + (j === 0 ? 0 : verticalSpacing);
-					var right = startRight + (k * (horizontalSpacing + elWidth));
+					var right = lastRight + (k * (horizontalSpacing + elWidth));
 					
 					element.css(element._positionY, top + 'px');
 					element.css(element._positionX, right + 'px');
@@ -91,9 +91,11 @@ angular.module('ui-notification').factory('Notification', function(
             }
 
 			angular.element(document.getElementsByTagName('body')).append(templateElement);
-			messageElements.push(templateElement);				
+			var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
+			templateElement.css(templateElement._positionY, offset + "px");
+			messageElements.push(templateElement);
 
-			$timeout(reposite);						
+			$timeout(reposite);
 
 		}).error(function(data){
 			throw new Error('Template ('+args.template+') could not be loaded. ' + data);
