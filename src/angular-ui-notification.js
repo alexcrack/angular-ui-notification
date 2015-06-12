@@ -11,8 +11,6 @@ angular.module('ui-notification').factory('Notification', function(
 	var horizontalSpacing = 10;
 	var type = '';
 	var delay = 5000;
-	//var positionY = 'top';
-	//var positionX = 'right';
 
 	var messageElements = [];
 
@@ -45,36 +43,27 @@ angular.module('ui-notification').factory('Notification', function(
 				var k = 0;
 				var lastTop = startTop;
 				var lastRight = startRight;
-				var lastPosition = [];
 				for(var i = messageElements.length - 1; i >= 0; i --) {
-					var element  = messageElements[i];
+					var element = messageElements[i];
 					var elHeight = parseInt(element[0].offsetHeight);
-					var elWidth  = parseInt(element[0].offsetWidth);
-					var position = lastPosition[element._positionY+element._positionX];
-
+					var elWidth = parseInt(element[0].offsetWidth);
 					if ((top + elHeight) > window.innerHeight) {
-						position = startTop;
+						lastTop = startTop;
 						k ++;
 						j = 0;
 					}
-					
-					var top = (lastTop = position ? position : startTop) + (j === 0 ? 0 : verticalSpacing);
+					var top = lastTop + (j === 0 ? 0 : verticalSpacing);
 					var right = startRight + (k * (horizontalSpacing + elWidth));
 					
-					element.css(element._positionY, top + 'px');
-					element.css(element._positionX, right + 'px');
+					element.css('top', top + 'px');
+					element.css('right', right + 'px');
 					
-					lastPosition[element._positionY+element._positionX] = top + elHeight;
-
+					lastTop = top + elHeight;
 					j ++;
 				}
 			};
 
 			var templateElement = $compile(template)(scope);
-			args._positionY = args._positionY ? args._positionY : 'top';
-			args._positionX = args._positionX ? args._positionX : 'right';
-			templateElement._positionY = args._positionY;
-			templateElement._positionX = args._positionX;
 			templateElement.addClass(args.type);
 			templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
 				e = e.originalEvent || e;
