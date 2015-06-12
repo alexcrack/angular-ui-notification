@@ -55,7 +55,33 @@
                 </div>
             </div>
 
+            <div class="container">
+                <h3>Custom template and scope</h3>
+                <div class="btn-group-vertical">
+                    <button class="btn btn-primary show-custom" ng-click="customTemplateScope()">Custom template and scope</button>
+                </div>
+                <h5>Clicks: {{nClicksLog.length}}</h5>
+                <ul class="elements-count">
+                    <li ng-repeat="l in nClicksLog track by $index">{{$index + 1}}. {{l}}</li>
+                </ul>
+            </div>
+
         </div>
+
+        <script type="text/ng-template" id="custom_template.html">
+            <div class="ui-notification custom-template">
+                <h3>{{nTitle}}</h3>
+                <div class="message" ng-bind-html="message"></div>
+                <div class="message">
+                    <ul>
+                        <li ng-repeat="el in nElements">{{el}}</li>
+                    </ul>
+                </div>
+                <div class="message">
+                    <a class="btn btn-small btn-primary close-notification" ng-click="nClick()">Click me</a>
+                </div>
+            </div>
+        </script>
 
         <script src="angular.min.js"></script>
         <script src="angular-ui-notification.min.js"></script>  
@@ -127,6 +153,18 @@
 
                 $scope.BottomLeft = function() {
                     Notification.warning({message: 'warning Bottom Left', _positionY: 'bottom', _positionX: 'left'});
+                };
+
+                // == 
+
+                $scope.nTitle = "Title from other scope";
+                $scope.nClicksLog = [];
+                $scope.nClick = function() {
+                    $scope.nClicksLog.push("Clicked");
+                };
+                $scope.nElements = ['one', 'two', 'three'];
+                $scope.customTemplateScope = function() {
+                    Notification.primary({message: "Just message", template: "custom_template.html", scope: $scope});
                 };
 
             });
