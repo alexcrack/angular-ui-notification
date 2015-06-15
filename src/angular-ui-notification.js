@@ -1,18 +1,26 @@
 angular.module('ui-notification',[]);
 
+angular.module('ui-notification').value('uiNotificationConfig', {
+	delay: 5000,
+	startTop: 10,
+	startRight: 10,
+	verticalSpacing: 10,
+	horizontalSpacing: 10,
+	positionX: 'right',
+	positionY: 'top',
+	replaceMessage: false
+});
+
 angular.module('ui-notification').value('uiNotificationTemplates','angular-ui-notification.html');
 
 angular.module('ui-notification').factory('Notification', function(
-	$timeout, uiNotificationTemplates, $http, $compile, $templateCache, $rootScope, $injector, $sce) {
+	$timeout, uiNotificationTemplates, $http, $compile, $templateCache, $rootScope, $injector, $sce, uiNotificationConfig) {
 
-	var startTop = 10;
-	var startRight = 10;
-	var verticalSpacing = 10;
-	var horizontalSpacing = 10;
-	var type = '';
-	var delay = 5000;
-	//var positionY = 'top';
-	//var positionX = 'right';
+	var startTop = uiNotificationConfig.startTop;
+	var startRight = uiNotificationConfig.startRight;
+	var verticalSpacing = uiNotificationConfig.verticalSpacing;
+	var horizontalSpacing = uiNotificationConfig.horizontalSpacing;
+	var delay = uiNotificationConfig.delay;
 
 	var messageElements = [];
 
@@ -26,6 +34,8 @@ angular.module('ui-notification').factory('Notification', function(
 		args.template = args.template ? args.template : uiNotificationTemplates;
 		args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
 		args.type = t ? t : '';
+		args.positionY = args.positionY ? args.positionY : uiNotificationConfig.positionY;
+		args.positionX = args.positionX ? args.positionX : uiNotificationConfig.positionX;
 
 		$http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -66,10 +76,8 @@ angular.module('ui-notification').factory('Notification', function(
 			};
 
 			var templateElement = $compile(template)(scope);
-			args._positionY = args._positionY ? args._positionY : 'top';
-			args._positionX = args._positionX ? args._positionX : 'right';
-			templateElement._positionY = args._positionY;
-			templateElement._positionX = args._positionX;
+			templateElement._positionY = args.positionY;
+			templateElement._positionX = args.positionX;
 			templateElement.addClass(args.type);
 			templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
 				e = e.originalEvent || e;
@@ -98,10 +106,6 @@ angular.module('ui-notification').factory('Notification', function(
 		
 	};
 
-	notify.config = function(args){
-		startTop = args.top ? args.top : startTop;
-		verticalSpacing = args.verticalSpacing ? args.verticalSpacing : verticalSpacing;
-	};
 	notify.primary = function(args) {
 		this(args, 'primary');
 	};

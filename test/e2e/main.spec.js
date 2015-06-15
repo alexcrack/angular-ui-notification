@@ -13,7 +13,6 @@ describe('E2E: main page', function() {
     describe('Show notifications', function() {
         it('should be shown notifications', function() {
             var buttons = element.all(by.css('button.btn'));
-            console.log('buttons count', buttons.count());
             buttons.each(function(button) {
                 button.click();
             });
@@ -37,14 +36,40 @@ describe('E2E: main page', function() {
             expect(element.all(by.css('div.custom-template')).count()).toBe(1);
         });
 
-        it('should trigger click callback in current scope from notification', function() {
+        it('should trigger click callback in current scope from notification', function(done) {
             element(by.css('button.show-custom')).click();
 
-            element(by.css('a.close-notification')).click();
+            setTimeout(function() {
+                element(by.css('a.close-notification')).click();
 
-            var clicksLog = element.all(by.css('.elements-count li'));
-            expect(clicksLog.count()).toBe(1);
+                setTimeout(function() {
+                    var clicksLog = element.all(by.css('.elements-count li'));
+                    expect(clicksLog.count()).toBe(1);
+                    done();
+                }, 1000);
+
+            }, 1000);
         });
     });
 
+});
+
+describe("E2E: notification with configuration", function() {
+    beforeEach(function() {
+        browser.ignoreSynchronization = true;
+        browser.driver.get('http://localhost:8080/notification_config.html');
+    });
+
+    describe('Show notifications', function() {
+        it('should be shown notifications', function() {
+            var buttons = element.all(by.css('button.btn'));
+            buttons.each(function(button) {
+                button.click();
+            });
+
+            var notifications = element.all(by.css('.ui-notification'));
+            expect(notifications.count()).toBe(buttons.count());
+        });
+
+    });
 });
