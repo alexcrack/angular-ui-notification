@@ -65,5 +65,8 @@ angular.module('notificationTest').controller('notificationController', function
   // Embed HTML within your message.....
   Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
 
+  // Change position notification
+  Notification.error({message: 'Error Bottom Right', _positionY: 'bottom', _positionX: 'right'});
+  
 }
 ```

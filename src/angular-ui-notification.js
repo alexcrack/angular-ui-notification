@@ -11,6 +11,8 @@ angular.module('ui-notification').factory('Notification', function(
 	var horizontalSpacing = 10;
 	var type = '';
 	var delay = 5000;
+	//var positionY = 'top';
+	//var positionX = 'right';
 
 	var messageElements = [];
 
@@ -20,50 +22,54 @@ angular.module('ui-notification').factory('Notification', function(
 			args = {message:args};
 		}
 
+		args.scope = args.scope ? args.scope : $rootScope;
 		args.template = args.template ? args.template : uiNotificationTemplates;
 		args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
 		args.type = t ? t : '';
 
 		$http.get(args.template,{cache: $templateCache}).success(function(template) {
 
-			var scope = $rootScope.$new();
+			var scope = args.scope.$new();
 			scope.message = $sce.trustAsHtml(args.message);
 			scope.title = $sce.trustAsHtml(args.title);
 			scope.t = args.type.substr(0,1);
 			scope.delay = args.delay;
-
-			if (typeof args.scope === 'object'){
-				for (var key in args.scope){
-					scope[key] = args.scope[key];
-				}
-			}
 
 			var reposite = function() {
 				var j = 0;
 				var k = 0;
 				var lastTop = startTop;
 				var lastRight = startRight;
+				var lastPosition = [];
 				for(var i = messageElements.length - 1; i >= 0; i --) {
-					var element = messageElements[i];
+					var element  = messageElements[i];
 					var elHeight = parseInt(element[0].offsetHeight);
-					var elWidth = parseInt(element[0].offsetWidth);
+					var elWidth  = parseInt(element[0].offsetWidth);
+					var position = lastPosition[element._positionY+element._positionX];
+
 					if ((top + elHeight) > window.innerHeight) {
-						lastTop = startTop;
+						position = startTop;
 						k ++;
 						j = 0;
 					}
-					var top = lastTop + (j === 0 ? 0 : verticalSpacing);
-					var right = startRight + (k * (horizontalSpacing + elWidth));
 					
-					element.css('top', top + 'px');
-					element.css('right', right + 'px');
+					var top = (lastTop = position ? position : startTop) + (j === 0 ? 0 : verticalSpacing);
+					var right = lastRight + (k * (horizontalSpacing + elWidth));
 					
-					lastTop = top + elHeight;
+					element.css(element._positionY, top + 'px');
+					element.css(element._positionX, right + 'px');
+					
+					lastPosition[element._positionY+element._positionX] = top + elHeight;
+
 					j ++;
 				}
 			};
 
 			var templateElement = $compile(template)(scope);
+			args._positionY = args._positionY ? args._positionY : 'top';
+			args._positionX = args._positionX ? args._positionX : 'right';
+			templateElement._positionY = args._positionY;
+			templateElement._positionX = args._positionX;
 			templateElement.addClass(args.type);
 			templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
 				e = e.originalEvent || e;
@@ -73,14 +79,18 @@ angular.module('ui-notification').factory('Notification', function(
 					reposite();
 				}
 			});
-			$timeout(function() {
-				templateElement.addClass('killed');
-			}, args.delay);
+            if (angular.isNumber(args.delay)) {
+                $timeout(function() {
+                    templateElement.addClass('killed');
+                }, args.delay);
+            }
 
 			angular.element(document.getElementsByTagName('body')).append(templateElement);
-			messageElements.push(templateElement);				
+			var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
+			templateElement.css(templateElement._positionY, offset + "px");
+			messageElements.push(templateElement);
 
-			$timeout(reposite);						
+			$timeout(reposite);
 
 		}).error(function(data){
 			throw new Error('Template ('+args.template+') could not be loaded. ' + data);
