@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="notificationTest">
+<head>
+    <title>Notification demo (replace messages)</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Notification demo (replace messages)</h1>
+</div>
+
+<div ng-controller="notificationController">
+    <div class="container">
+        <h3>Types of notifications</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary" ng-click="primary()">Primary Notification (don't replace)</button>
+            <button class="btn btn-danger" ng-click="error()">Error Notification (don't replace)</button>
+            <button class="btn btn-success" ng-click="success()">Success Notification (replace messages)</button>
+            <button class="btn btn-info" ng-click="info()">Information Notification (replace messages)</button>
+            <button class="btn btn-warning" ng-click="warning()">Warning Notification (replace messages)</button>
+        </div>
+    </div>
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+    // Configuration
+
+    angular.module('notificationTest', ['ui-notification']);
+    angular.module('notificationTest')
+            .controller('notificationController', function($scope, Notification) {
+                $scope.primary = function() {
+                    Notification.primary("Primary notification (don't replace)");
+                };
+
+                $scope.error = function() {
+                    Notification.error("Error notification (don't replace)");
+                };
+
+                $scope.success = function() {
+                    Notification.success({
+                        message: "Success message (replace messages)",
+                        delay: 10000,
+                        replaceMessage: true
+                    });
+                };
+
+                $scope.info = function() {
+                    Notification.info({
+                        message: "Info message (replace messages)",
+                        delay: 10000,
+                        replaceMessage: true
+                    });
+                };
+
+                $scope.warning = function() {
+                    Notification.warning({
+                        message: "Warning message (replace messages)",
+                        delay: 10000,
+                        replaceMessage: true
+                    });
+                };
+            });
+
+</script>
+</body>
+</html>

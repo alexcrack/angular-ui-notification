@@ -36,6 +36,7 @@ angular.module('ui-notification').factory('Notification', function(
 		args.type = t ? t : '';
 		args.positionY = args.positionY ? args.positionY : uiNotificationConfig.positionY;
 		args.positionX = args.positionX ? args.positionX : uiNotificationConfig.positionX;
+		args.replaceMessage = args.replaceMessage ? args.replaceMessage : uiNotificationConfig.replaceMessage;
 
 		$http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -53,6 +54,10 @@ angular.module('ui-notification').factory('Notification', function(
 				var lastPosition = [];
 				for(var i = messageElements.length - 1; i >= 0; i --) {
 					var element  = messageElements[i];
+					if (args.replaceMessage && i < messageElements.length - 1) {
+						element.addClass('killed');
+						continue;
+					}
 					var elHeight = parseInt(element[0].offsetHeight);
 					var elWidth  = parseInt(element[0].offsetWidth);
 					var position = lastPosition[element._positionY+element._positionX];
