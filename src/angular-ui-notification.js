@@ -43,7 +43,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.type = t ? t : '';
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
-            args.replaceMessage = args.replaceMessage ? args.replaceMessage : uiNotificationConfig.replaceMessage;
+            args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
 
             $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
