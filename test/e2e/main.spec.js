@@ -73,3 +73,24 @@ describe("E2E: notification with configuration", function() {
 
     });
 });
+
+describe("E2E: replace notifications", function() {
+    beforeEach(function() {
+        browser.ignoreSynchronization = true;
+        browser.driver.get('http://localhost:8080/notification_replace.html');
+    });
+
+    describe('show all notifications', function() {
+        it('should leave only one last message', function(done) {
+            var buttons = element.all(by.css('button.btn'));
+            buttons.each(function(button) {
+                button.click();
+            });
+
+            setTimeout(function() {
+                var notifications = element.all(by.css('.ui-notification'));
+                return done(expect(notifications.count()).toEqual(1));
+            }, 1000);
+        });
+    });
+});
