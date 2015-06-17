@@ -28,17 +28,19 @@
 <script src="angular-ui-notification.min.js"></script>
 <script type="text/javascript">
     // Configuration
-    angular.module('ui-notification').value('uiNotificationConfig', {
-        delay: 10000,
-        startTop: 20,
-        startRight: 10,
-        verticalSpacing: 20,
-        horizontalSpacing: 20,
-        positionX: 'left',
-        positionY: 'bottom'
-    });
+    angular.module('notificationTest', ['ui-notification'])
+        .config(function(NotificationProvider) {
+            NotificationProvider.setOptions({
+                delay: 10000,
+                startTop: 20,
+                startRight: 10,
+                verticalSpacing: 20,
+                horizontalSpacing: 20,
+                positionX: 'left',
+                positionY: 'bottom'
+            });
+        });
 
-    angular.module('notificationTest', ['ui-notification']);
     angular.module('notificationTest')
         .controller('notificationController', function($scope, Notification) {
             $scope.primary = function() {
