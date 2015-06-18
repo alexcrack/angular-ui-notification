@@ -123,6 +123,29 @@ The options list:
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 
+## Methods
+
+#### Notification service methods
+
+|              Method name               |                   Description                   |
+|----------------------------------------|-------------------------------------------------|
+| Notification(), Notification.primary() | Show the message with bootstrap's primary class |
+| Notification.info()                    | Show the message with bootstrap's info class    |
+| Notification.success()                 | Show the message with bootstrap's success class |
+| Notification.warning()                 | Show the message with bootstrap's warn class    |
+| Notification.error()                   | Show the message with bootstrap's danger class  |
+| Notification.clearAll()                | Remove all shown messages                       |
+
+#### Returning value
+
+Every "show" method returns a promise resolves a notification scope with methods:
+
+|          Method name           |                                                   Description                                                    |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------|
+| notificationScope.kill(isHard) | Remove the specific message<br>isHard - if false or omitted kill message with fadeout effect (default). If true - immediately remove the message|
+
+
+
 ## Custom Templates
 
 Custom template can be provided.
