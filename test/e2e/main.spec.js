@@ -89,8 +89,40 @@ describe("E2E: replace notifications", function() {
 
             setTimeout(function() {
                 var notifications = element.all(by.css('.ui-notification'));
-                return done(expect(notifications.count()).toEqual(1));
-            }, 1000);
+                expect(notifications.count()).toEqual(1);
+                done();
+            }, 4000);
         });
+    });
+});
+
+describe("E2E: kill notification", function() {
+    beforeEach(function() {
+        browser.ignoreSynchronization = true;
+        browser.driver.get('http://localhost:8080/notification_kill.html');
+    });
+
+    describe('Show and kill notification', function() {
+
+        it('should kill notification with fadeout', function(done) {
+            element(by.css('button.btn.kill-soft')).click();
+
+            setTimeout(function() {
+                var notifications = element.all(by.css('.ui-notification'));
+                expect(notifications.count()).toEqual(3);
+                done();
+            }, 6000);
+        });
+
+        it('should hard kill notification', function(done) {
+            element(by.css('button.btn.kill-hard')).click();
+
+            setTimeout(function() {
+                var notifications = element.all(by.css('.ui-notification'));
+                expect(notifications.count()).toEqual(3);
+                done();
+            }, 6000);
+        });
+
     });
 });

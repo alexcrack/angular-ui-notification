@@ -20,7 +20,7 @@ angular.module('ui-notification').provider('Notification', function() {
         this.options = angular.extend({}, this.options, options);
     };
 
-    this.$get = function($timeout, uiNotificationTemplates, $http, $compile, $templateCache, $rootScope, $injector, $sce) {
+    this.$get = function($timeout, uiNotificationTemplates, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q) {
         var options = this.options;
 
         var startTop = options.startTop;
@@ -32,6 +32,7 @@ angular.module('ui-notification').provider('Notification', function() {
         var messageElements = [];
 
         var notify = function(args, t){
+            var deferred = $q.defer();
 
             if (typeof args !== 'object') {
                 args = {message:args};
@@ -110,28 +111,43 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
 
+                scope._templateElement = templateElement;
+
+                scope.kill = function(isHard) {
+                    if (isHard) {
+                        messageElements.splice(messageElements.indexOf(scope._templateElement), 1);
+                        scope._templateElement.remove();
+                        $timeout(reposite);
+                    } else {
+                        scope._templateElement.addClass('killed');
+                    }
+                };
+
                 $timeout(reposite);
+
+                deferred.resolve(scope);
 
             }).error(function(data){
                 throw new Error('Template ('+args.template+') could not be loaded. ' + data);
             });
 
+            return deferred.promise;
         };
 
         notify.primary = function(args) {
-            this(args, 'primary');
+            return this(args, 'primary');
         };
         notify.error = function(args) {
-            this(args, 'error');
+            return this(args, 'error');
         };
         notify.success = function(args) {
-            this(args, 'success');
+            return this(args, 'success');
         };
         notify.info = function(args) {
-            this(args, 'info');
+            return this(args, 'info');
         };
         notify.warning = function(args) {
-            this(args, 'warning');
+            return this(args, 'warning');
         };
 
         notify.clearAll = function() {
