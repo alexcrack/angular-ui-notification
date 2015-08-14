@@ -110,16 +110,17 @@ Options can be passed to configuration provider globally or used in the current 
 
 The options list:
 
-|       Option      |  Possible values  | Default value |                               Description                                |
-|-------------------|-------------------|---------------|--------------------------------------------------------------------------|
-| delay             | Any integer value | 5000          | The time in ms the message is showing before start fading out            |
-| startTop          | Any integer value | 10            | Vertical padding between messages and vertical border of the browser     |
-| startRight        | Any integer value | 10            | Horizontal padding between messages and horizontal border of the browser |
-| verticalSpacing   | Any integer value | 10            | Vertical spacing between messages                                        |
-| horizontalSpacing | Any integer value | 10            | Horizontal spacing between messages                                      |
-| positionX         | "right", "left"   | "right"       | Horizontal position of the message                                       |
-| positionY         | "top", "bottom"   | "top"         | Vertical position of the message                                         |
-| replaceMessage    | true, false       | false         | If true every next appearing message replace old messages                |
+|       Option      |  Possible values  |         Default value          |                               Description                                |
+| ----------------- | ----------------- | ------------------------------ | ------------------------------------------------------------------------ |
+| delay             | Any integer value | 5000                           | The time in ms the message is showing before start fading out            |
+| startTop          | Any integer value | 10                             | Vertical padding between messages and vertical border of the browser     |
+| startRight        | Any integer value | 10                             | Horizontal padding between messages and horizontal border of the browser |
+| verticalSpacing   | Any integer value | 10                             | Vertical spacing between messages                                        |
+| horizontalSpacing | Any integer value | 10                             | Horizontal spacing between messages                                      |
+| positionX         | "right", "left"   | "right"                        | Horizontal position of the message                                       |
+| positionY         | "top", "bottom"   | "top"                          | Vertical position of the message                                         |
+| replaceMessage    | true, false       | false                          | If true every next appearing message replace old messages                |
+| templateUrl       | Any string        | "angular-ui-notification.html" | Custom template filename (URL)                                           |
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 

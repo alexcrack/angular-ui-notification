@@ -164,7 +164,7 @@
                 };
                 $scope.nElements = ['one', 'two', 'three'];
                 $scope.customTemplateScope = function() {
-                    Notification.primary({message: "Just message", template: "custom_template.html", scope: $scope});
+                    Notification.primary({message: "Just message", templateUrl: "custom_template.html", scope: $scope});
                 };
 
             });

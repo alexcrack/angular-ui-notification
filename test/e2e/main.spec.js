@@ -126,3 +126,25 @@ describe("E2E: kill notification", function() {
 
     });
 });
+
+describe("E2E: custom templates", function() {
+    beforeEach(function() {
+        browser.ignoreSynchronization = true;
+        browser.driver.get('http://localhost:8080/custom_template.html');
+    });
+
+    describe('Show custom templated notifications', function() {
+
+        it('should show 4 notifications (2 types of every template)', function() {
+            var buttons = element.all(by.css('button.btn'));
+            buttons.each(function(button) {
+                button.click();
+                button.click();
+            });
+
+            expect(element.all(by.css('div.custom-template')).count()).toBe(2);
+            expect(element.all(by.css('div.custom-template-overriden')).count()).toBe(2);
+        });
+
+    });
+});

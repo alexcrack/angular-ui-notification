@@ -1,7 +1,5 @@
 angular.module('ui-notification',[]);
 
-angular.module('ui-notification').value('uiNotificationTemplates','angular-ui-notification.html');
-
 angular.module('ui-notification').provider('Notification', function() {
 
     this.options = {
@@ -12,7 +10,8 @@ angular.module('ui-notification').provider('Notification', function() {
         horizontalSpacing: 10,
         positionX: 'right',
         positionY: 'top',
-        replaceMessage: false
+        replaceMessage: false,
+        templateUrl: 'angular-ui-notification.html'
     };
 
     this.setOptions = function(options) {
@@ -20,7 +19,7 @@ angular.module('ui-notification').provider('Notification', function() {
         this.options = angular.extend({}, this.options, options);
     };
 
-    this.$get = function($timeout, uiNotificationTemplates, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q) {
+    this.$get = function($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q) {
         var options = this.options;
 
         var startTop = options.startTop;
@@ -39,7 +38,7 @@ angular.module('ui-notification').provider('Notification', function() {
             }
 
             args.scope = args.scope ? args.scope : $rootScope;
-            args.template = args.template ? args.template : uiNotificationTemplates;
+            args.template = args.templateUrl ? args.templateUrl : options.templateUrl;
             args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
             args.type = t ? t : '';
             args.positionY = args.positionY ? args.positionY : options.positionY;
