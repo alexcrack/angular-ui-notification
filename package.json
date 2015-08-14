@@ -1,6 +1,6 @@
 {
   "name": "angular-ui-notification",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating",
   "main": "dist/angular-ui-notification.min",
   "scripts": {
