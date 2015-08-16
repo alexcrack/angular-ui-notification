@@ -139,16 +139,16 @@ Also you can pass the "scope" option. This is an angular scope option Notificati
 
 #### Notification service options
 
-|       Option      |  Possible values  |         Default value             |                               Description                                |
-| ----------------- | ----------------- | --------------------------------- | ------------------------------------------------------------------------ |
-| title             | *String*             | `""`                              | Title to appear at the top of the notification                        |
-| message           | *String*             | `""`                              | Message to appear in the notification                                 |
-| template          | *String*             | `"angular-ui-notification.html"`  | URL of template to be used for notification                           |
-| delay             | *Int*                | `5000` or configured global delay | Number of ms before notification fades out                            |
-| type              | Bootstrap brand type | `"primary"`                       | Bootstrap flavoring                                                   |
-| positionY         | "top", "bottom"      | `"top"`                           |                                                                       |
-| positionX         | "right", "left"      | `"right"                          |                                                                       |
-| replaceMessage    | *Boolean*            | `false`                           | If true this message will replace old(er) message(s)                  |
+|       Option      |  Possible values                                 |         Default value             |                               Description                                |
+| ----------------- | ------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------ |
+| title             | *String*                                         | `""`                              | Title to appear at the top of the notification                           |
+| message           | *String*                                         | `""`                              | Message to appear in the notification                                    |
+| template          | *String*                                         | `"angular-ui-notification.html"`  | URL of template to be used for notification                              |
+| delay             | *Int*                                            | `5000` or configured global delay | Number of ms before notification fades out                               |
+| type              | "primary", "info", "success", "warning", "error" | `"primary"`                       | Bootstrap flavoring                                                      |   
+| positionY         | "top", "bottom"                                  | `"top"`                           |                                                                          |
+| positionX         | "right", "left"                                  | `"right"                          |                                                                          |
+| replaceMessage    | *Boolean*                                        | `false`                           | If true this message will replace old(er) message(s)                     |
 
 #### Returning value
 
