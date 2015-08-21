@@ -162,13 +162,9 @@ angular.module('ui-notification').provider('Notification', function() {
         };
 
         notify.clearAll = function() {
-            var notifys = angular.element(document.getElementsByClassName('ui-notification'));
-
-            if (notifys) {
-                angular.forEach(notifys, function(notify) {
-                    notify.remove();
-                });
-            }
+            angular.forEach(messageElements, function(element) {
+                element.addClass('killed');
+            });
         };
 
         return notify;
