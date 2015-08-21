@@ -20,6 +20,8 @@
             <button class="btn btn-success" ng-click="success()">Success Notification (bottom right position)</button>
             <button class="btn btn-info" ng-click="info()">Information Notification (top left position)</button>
             <button class="btn btn-warning" ng-click="warning()">Warning Notification (top right position)</button>
+            <button class="btn btn-primary" ng-click="primaryCenter()">Primary Notification (top center position)</button>
+            <button class="btn btn-danger" ng-click="errorCenter()">Error Notification (bottom center position)</button>
         </div>
     </div>
 </div>
@@ -72,6 +74,24 @@
                     message: "Warning message top right position",
                     positionY: 'top',
                     positionX: 'right',
+                    delay: 5000
+                });
+            };
+
+            $scope.primaryCenter = function() {
+                Notification.primary({
+                    message: "Primary message top center position",
+                    positionY: 'top',
+                    positionX: 'center',
+                    delay: 5000
+                });
+            };
+
+            $scope.errorCenter = function() {
+                Notification.error({
+                    message: "Error message bottom center position",
+                    positionY: 'bottom',
+                    positionX: 'center',
                     delay: 5000
                 });
             };
