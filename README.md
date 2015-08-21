@@ -110,17 +110,17 @@ Options can be passed to configuration provider globally or used in the current 
 
 The options list:
 
-|       Option      |  Possible values  |         Default value          |                               Description                                |
-| ----------------- | ----------------- | ------------------------------ | ------------------------------------------------------------------------ |
-| delay             | Any integer value | 5000                           | The time in ms the message is showing before start fading out            |
-| startTop          | Any integer value | 10                             | Vertical padding between messages and vertical border of the browser     |
-| startRight        | Any integer value | 10                             | Horizontal padding between messages and horizontal border of the browser |
-| verticalSpacing   | Any integer value | 10                             | Vertical spacing between messages                                        |
-| horizontalSpacing | Any integer value | 10                             | Horizontal spacing between messages                                      |
-| positionX         | "right", "left"   | "right"                        | Horizontal position of the message                                       |
-| positionY         | "top", "bottom"   | "top"                          | Vertical position of the message                                         |
-| replaceMessage    | true, false       | false                          | If true every next appearing message replace old messages                |
-| templateUrl       | Any string        | "angular-ui-notification.html" | Custom template filename (URL)                                           |
+|       Option      |      Possible values      |         Default value          |                               Description                                |
+| ----------------- | ------------------------- | ------------------------------ | ------------------------------------------------------------------------ |
+| delay             | Any integer value         | 5000                           | The time in ms the message is showing before start fading out            |
+| startTop          | Any integer value         | 10                             | Vertical padding between messages and vertical border of the browser     |
+| startRight        | Any integer value         | 10                             | Horizontal padding between messages and horizontal border of the browser |
+| verticalSpacing   | Any integer value         | 10                             | Vertical spacing between messages                                        |
+| horizontalSpacing | Any integer value         | 10                             | Horizontal spacing between messages                                      |
+| positionX         | "right", "left", "center" | "right"                        | Horizontal position of the message                                       |
+| positionY         | "top", "bottom"           | "top"                          | Vertical position of the message                                         |
+| replaceMessage    | true, false               | false                          | If true every next appearing message replace old messages                |
+| templateUrl       | Any string                | "angular-ui-notification.html" | Custom template filename (URL)                                           |
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 
@@ -139,16 +139,16 @@ Also you can pass the "scope" option. This is an angular scope option Notificati
 
 #### Notification service options
 
-|       Option      |  Possible values                                 |         Default value             |                               Description                                                              |
-| ----------------- | ------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| title             | *String*                                         | `""`                              | Title to appear at the top of the notification                                                         |
-| message           | *String*                                         | `""`                              | Message to appear in the notification                                                                  |
-| templateUrl       | *String*                                         | `"angular-ui-notification.html"`  | URL of template to be used for notification                                                            |
-| delay             | *Int* (?)                                        | `5000` or configured global delay | Number of ms before notification fades out. If not an integer, notification will persist until killed. |
-| type              | "primary", "info", "success", "warning", "error" | `"primary"`                       | Bootstrap flavoring                                                                                    |   
-| positionY         | "top", "bottom"                                  | `"top"`                           |                                                                                                        |
-| positionX         | "right", "left"                                  | `"right"                          |                                                                                                        |
-| replaceMessage    | *Boolean*                                        | `false`                           | If true this message will replace old(er) message(s)                                                   |
+|     Option     |                 Possible values                  |           Default value           |                                              Description                                               |
+| -------------- | ------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| title          | *String*                                         | `""`                              | Title to appear at the top of the notification                                                         |
+| message        | *String*                                         | `""`                              | Message to appear in the notification                                                                  |
+| templateUrl    | *String*                                         | `"angular-ui-notification.html"`  | URL of template to be used for notification                                                            |
+| delay          | *Int* (?)                                        | `5000` or configured global delay | Number of ms before notification fades out. If not an integer, notification will persist until killed. |
+| type           | "primary", "info", "success", "warning", "error" | `"primary"`                       | Bootstrap flavoring                                                                                    |
+| positionY      | "top", "bottom"                                  | `"top"`                           |                                                                                                        |
+| positionX      | "right", "left", "center"                        | `"right"                          |                                                                                                        |
+| replaceMessage | *Boolean*                                        | `false`                           | If true this message will replace old(er) message(s)                                                   |
 
 #### Returning value
 
