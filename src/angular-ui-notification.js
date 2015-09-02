@@ -41,7 +41,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.scope = args.scope ? args.scope : $rootScope;
             args.template = args.templateUrl ? args.templateUrl : options.templateUrl;
             args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
-            args.type = t ? t : '';
+            args.type = t || options.type ||  '';
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
