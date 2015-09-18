@@ -26,7 +26,7 @@ var banner = ['/**',
 
   // ==== Styles
 gulp.task('styles', function() {
-    gulp.src('src/angular-ui-notification.less')
+    gulp.src('src/build.less')
         .pipe(less({
             strictMath: true
         }))
