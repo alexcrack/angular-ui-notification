@@ -11,7 +11,8 @@ angular.module('ui-notification').provider('Notification', function() {
         positionX: 'right',
         positionY: 'top',
         replaceMessage: false,
-        templateUrl: 'angular-ui-notification.html'
+        templateUrl: 'angular-ui-notification.html',
+        onClose: undefined
     };
 
     this.setOptions = function(options) {
@@ -27,6 +28,8 @@ angular.module('ui-notification').provider('Notification', function() {
         var verticalSpacing = options.verticalSpacing;
         var horizontalSpacing = options.horizontalSpacing;
         var delay = options.delay;
+
+        $templateCache.put('angular-ui-notification.html', '<div class="ui-notification"><h3 ng-show="title" ng-bind-html="title"></h3><div class="message" ng-bind-html="message"></div></div>');
 
         var messageElements = [];
         var isResizeBound = false;
@@ -45,6 +48,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
+            args.onClose = args.onClose ? args.onClose : options.onClose;
 
             $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -102,6 +106,9 @@ angular.module('ui-notification').provider('Notification', function() {
                         templateElement.remove();
                         messageElements.splice(messageElements.indexOf(templateElement), 1);
                         reposite();
+                        if (args.onClose) {
+                            args.onClose(templateElement);
+                        }
                     }
                 });
                 if (angular.isNumber(args.delay)) {
@@ -122,6 +129,9 @@ angular.module('ui-notification').provider('Notification', function() {
                         messageElements.splice(messageElements.indexOf(scope._templateElement), 1);
                         scope._templateElement.remove();
                         $timeout(reposite);
+                        if (scope.onClose) {
+                            scope.onClose(scope._templateElement);
+                        }
                     } else {
                         scope._templateElement.addClass('killed');
                     }
