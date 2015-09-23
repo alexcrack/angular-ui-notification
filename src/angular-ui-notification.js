@@ -29,8 +29,6 @@ angular.module('ui-notification').provider('Notification', function() {
         var horizontalSpacing = options.horizontalSpacing;
         var delay = options.delay;
 
-        $templateCache.put('angular-ui-notification.html', '<div class="ui-notification"><h3 ng-show="title" ng-bind-html="title"></h3><div class="message" ng-bind-html="message"></div></div>');
-
         var messageElements = [];
         var isResizeBound = false;
 
