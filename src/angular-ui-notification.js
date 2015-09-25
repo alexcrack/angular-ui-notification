@@ -55,6 +55,7 @@ angular.module('ui-notification').provider('Notification', function() {
                 scope.title = $sce.trustAsHtml(args.title);
                 scope.t = args.type.substr(0,1);
                 scope.delay = args.delay;
+                scope.onClose = args.onClose;
 
                 var reposite = function() {
                     var j = 0;
