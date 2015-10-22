@@ -20,6 +20,10 @@ angular.module('ui-notification').provider('Notification', function() {
     };
 
     this.$get = function($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q, $window) {
+
+        window.innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        window.innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
         var options = this.options;
 
         var startTop = options.startTop;
