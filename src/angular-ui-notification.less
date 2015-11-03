@@ -6,11 +6,13 @@
     position: fixed;
     z-index: 9999;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
     width: 300px;
     color: @btn-primary-color;
     background: @brand-primary;
     .transition(all ease 0.5s);
+    &.clickable {
+        cursor: pointer;
+    }
     &.killed {
         opacity: 0;
         .transition(opacity ease 1s);
