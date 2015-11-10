@@ -99,17 +99,21 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement._positionX = args.positionX;
                 templateElement.addClass(args.type);
 
+                var closeEvent = function(e){
+                    e = e.originalEvent || e;
+                    if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 1)){
+                        templateElement.remove();
+                        messageElements.splice(messageElements.indexOf(templateElement), 1);
+                        reposite();
+                    }
+                };
+
                 if (args.closeOnClick) {
                     templateElement.addClass('clickable');
-                    templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
-                        e = e.originalEvent || e;
-                        if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 1)){
-                            templateElement.remove();
-                            messageElements.splice(messageElements.indexOf(templateElement), 1);
-                            reposite();
-                        }
-                    });
+                    templateElement.bind('click', closeEvent);
                 }
+
+                templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd', closeEvent);
 
                 if (angular.isNumber(args.delay)) {
                     $timeout(function() {
