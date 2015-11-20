@@ -67,6 +67,10 @@ gulp.task('service', function() {
             'build/angular-ui-notification.templates.js'
         ]))
         .pipe(concat('angular-ui-notification.js'))
+
+        .pipe(header(banner, { pkg : pkg }))
+        .pipe(gulp.dest('dist'))
+
         .pipe(uglify())
         .pipe(rename({
             suffix: '.min'
