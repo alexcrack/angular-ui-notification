@@ -1,7 +1,7 @@
 /**
  * angular-ui-notification - Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating
  * @author Alex_Crack
- * @version v0.0.14
+ * @version v0.1.0
  * @link https://github.com/alexcrack/angular-ui-notification
  * @license MIT
  */
@@ -48,7 +48,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.scope = args.scope ? args.scope : $rootScope;
             args.template = args.templateUrl ? args.templateUrl : options.templateUrl;
             args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
-            args.type = t ? t : '';
+            args.type = t || options.type ||  '';
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
