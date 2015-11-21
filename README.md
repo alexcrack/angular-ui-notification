@@ -26,6 +26,11 @@ To install the package using bower and save as a dependency use...
 bower install angular-ui-notification --save
 ```  
 
+To install via NPM:
+```bash
+npm install angular-ui-notification --save
+```
+
 ## Usage
  [Heres a plunker demo](http://plnkr.co/edit/5Gk8UVvzUsjyof7Gxsua?p=preview)
 
