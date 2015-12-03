@@ -1,0 +1,69 @@
+<html ng-app="notificationTest">
+<head>
+    <title>Notification demo (custom templates)</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Angular ui-notification demo (custom templates)</h1>
+</div>
+
+<div ng-controller="notificationController">
+
+    <div class="container">
+        <h3>Custom templates</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-success kill-soft" ng-click="fireCustomTemplate()">Custom default template</button>
+            <button class="btn btn-danger kill-hard" ng-click="overrideCustomTemplate()">Custom template runtime</button>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/ng-template" id="custom_template.html">
+    <div class="ui-notification custom-template">
+        <div class="message" ng-bind-html="message"></div>
+        <div class="message">
+            Custom template
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="overriden_custom_template.html">
+    <div class="ui-notification custom-template-overriden">
+        <div class="message" ng-bind-html="message"></div>
+        <div class="message">
+            Overriden custom template
+        </div>
+    </div>
+</script>
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+    angular.module('notificationTest', ['ui-notification'])
+            .config(function(NotificationProvider) {
+                // Setup Custom template by default
+                NotificationProvider.setOptions({
+                    templateUrl: 'custom_template.html'
+                });
+            });
+
+    angular.module('notificationTest')
+
+            .controller('notificationController', function($scope, Notification, $timeout) {
+
+                $scope.fireCustomTemplate = function() {
+                    Notification("Hello, custom template!")
+                };
+
+                $scope.overrideCustomTemplate = function() {
+                    Notification.warning({message: "Goodbye, custom template. Hello overriden custom template", templateUrl: 'overriden_custom_template.html'});
+                };
+
+            });
+</script>
+</body>
+</html>

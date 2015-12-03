@@ -1,0 +1,68 @@
+<html ng-app="notificationTest">
+    <head>
+        <title>Notification demo (kill message)</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+        <link rel="stylesheet" href="angular-csp.css">
+        <link rel="stylesheet" href="angular-ui-notification.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Angular ui-notification demo (kill message)</h1>
+        </div>
+
+        <div ng-controller="notificationController">
+
+            <div class="container">
+                <h3>Kill message</h3>
+                <div class="btn-group-vertical">
+                    <button class="btn btn-success kill-soft" ng-click="killMessage()">Kill message with fadeout</button>
+                    <button class="btn btn-danger kill-hard" ng-click="killMessageHard()">Kill message hard</button>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="angular.min.js"></script>
+        <script src="angular-ui-notification.min.js"></script>  
+        <script type="text/javascript">
+            angular.module('notificationTest', ['ui-notification'])
+                .config(function(NotificationProvider) {
+                    NotificationProvider.setOptions({
+                        delay: 10000,
+                    });
+                });
+
+            angular.module('notificationTest')
+
+            .controller('notificationController', function($scope, Notification, $timeout) {
+
+                $scope.killMessage = function() {
+                    Notification.warning("Message shouldn't be killed");
+                    var test = Notification.primary("Message should be killed...");
+                    Notification.info("Message shouldn't be killed");
+
+                    $timeout(function() {
+                        Notification.success("API Key sucessfully regenerated.");
+                        test.then(function(notification) {
+                            notification.kill();
+                        });
+                    }, 3000);
+                };
+
+                $scope.killMessageHard = function() {
+                    Notification.warning("Message shouldn't be killed");
+                    var test = Notification.primary("Message should be killed...");
+                    Notification.info("Message shouldn't be killed");
+
+                    $timeout(function() {
+                        Notification.success("API Key sucessfully regenerated.");
+                        test.then(function(notification) {
+                            notification.kill(true);
+                        });
+                    }, 3000);
+                };
+
+            });
+        </script>
+    </body>
+</html>

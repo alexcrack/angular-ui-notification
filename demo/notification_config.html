@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="notificationTest">
+<head>
+    <title>Notification demo (custom configuration)</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Notification demo (custom configuration)</h1>
+</div>
+
+<div ng-controller="notificationController">
+    <div class="container">
+        <h3>Types of notifications</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary" ng-click="primary()">Primary Notification (default position)</button>
+            <button class="btn btn-danger" ng-click="error()">Error Notification (default position)</button>
+            <button class="btn btn-success" ng-click="success()">Success Notification (bottom right position)</button>
+            <button class="btn btn-info" ng-click="info()">Information Notification (top left position)</button>
+            <button class="btn btn-warning" ng-click="warning()">Warning Notification (top right position)</button>
+            <button class="btn btn-primary" ng-click="primaryCenter()">Primary Notification (top center position)</button>
+            <button class="btn btn-danger" ng-click="errorCenter()">Error Notification (bottom center position)</button>
+        </div>
+    </div>
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+    // Configuration
+    angular.module('notificationTest', ['ui-notification'])
+        .config(function(NotificationProvider) {
+            NotificationProvider.setOptions({
+                delay: 10000,
+                startTop: 20,
+                startRight: 10,
+                verticalSpacing: 20,
+                horizontalSpacing: 20,
+                positionX: 'left',
+                positionY: 'bottom'
+            });
+        });
+
+    angular.module('notificationTest')
+        .controller('notificationController', function($scope, Notification) {
+            $scope.primary = function() {
+                Notification.primary("Primary notification left bottom position (default)");
+            };
+
+            $scope.error = function() {
+                Notification.error("Error notification left bottom position (default)");
+            };
+
+            $scope.success = function() {
+                Notification.success({
+                    message: "Success message bottom right position",
+                    positionX: 'right',
+                    delay: 2000
+                });
+            };
+
+            $scope.info = function() {
+                Notification.info({
+                    message: "Info message top left position",
+                    positionY: 'top',
+                    delay: 2000
+                });
+            };
+
+            $scope.warning = function() {
+                Notification.warning({
+                    message: "Warning message top right position",
+                    positionY: 'top',
+                    positionX: 'right',
+                    delay: 5000
+                });
+            };
+
+            $scope.primaryCenter = function() {
+                Notification.primary({
+                    message: "Primary message top center position",
+                    positionY: 'top',
+                    positionX: 'center',
+                    delay: 5000
+                });
+            };
+
+            $scope.errorCenter = function() {
+                Notification.error({
+                    message: "Error message bottom center position",
+                    positionY: 'bottom',
+                    positionX: 'center',
+                    delay: 5000
+                });
+            };
+        });
+
+</script>
+</body>
+</html>
