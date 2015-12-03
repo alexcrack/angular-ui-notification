@@ -1,8 +1,8 @@
 {
   "name": "angular-ui-notification",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating",
-  "main": "dist/angular-ui-notification.min",
+  "main": "index.js",
   "scripts": {
     "update-chromedriver": "./node_modules/protractor/bin/webdriver-manager update",
     "test": "gulp tests"

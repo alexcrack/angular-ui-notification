@@ -26,11 +26,16 @@ var banner = ['/**',
 
   // ==== Styles
 gulp.task('styles', function() {
-    gulp.src('src/angular-ui-notification.less')
+    gulp.src('src/build.less')
         .pipe(less({
             strictMath: true
         }))
         .pipe(csscomb())
+        .pipe(header(banner, { pkg : pkg }))
+        .pipe(rename({
+            basename: 'angular-ui-notification'
+        }))
+        .pipe(gulp.dest('dist'))
         .pipe(minifyCSS())
         .pipe(rename({
             suffix: '.min'
@@ -49,7 +54,7 @@ gulp.task('templates', function() {
             quotes: true
         }))
         .pipe(templateCache({
-            module: 'ui-notification',
+            module: 'ui-notification'
         }))
         .pipe(rename('angular-ui-notification.templates.js'))
         .pipe(gulp.dest("build"));
@@ -67,6 +72,10 @@ gulp.task('service', function() {
             'build/angular-ui-notification.templates.js'
         ]))
         .pipe(concat('angular-ui-notification.js'))
+
+        .pipe(header(banner, { pkg : pkg }))
+        .pipe(gulp.dest('dist'))
+
         .pipe(uglify())
         .pipe(rename({
             suffix: '.min'
@@ -80,7 +89,7 @@ gulp.task('service', function() {
 gulp.task('e2eTest', function() {
     gulp.src(['./test/**/*_spec.js'])
         .pipe(protractor({
-            configFile: "protractor_conf.js",
+            configFile: "protractor_conf.js"
         }))
         .on('error', function(e) {throw e});
 });

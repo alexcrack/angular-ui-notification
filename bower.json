@@ -1,6 +1,6 @@
 {
   "name": "angular-ui-notification",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "homepage": "https://github.com/alexcrack/angular-ui-notification",
   "repository": {
     "type": "git",
@@ -11,8 +11,8 @@
   ],
   "description": "Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating",
   "main": [
-    "dist/angular-ui-notification.min.css",
-    "dist/angular-ui-notification.min.js"
+    "dist/angular-ui-notification.css",
+    "dist/angular-ui-notification.js"
   ],
   "keywords": [
     "angular",
