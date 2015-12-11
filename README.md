@@ -32,7 +32,7 @@ npm install angular-ui-notification --save
 ```
 
 ## Usage
- [Heres a plunker demo](http://plnkr.co/edit/5Gk8UVvzUsjyof7Gxsua?p=preview)
+ [Heres a plunker demo](http://plnkr.co/edit/h08qQF2qlVE3arERpdfi?p=preview)
 
   
 In your html/template add 
