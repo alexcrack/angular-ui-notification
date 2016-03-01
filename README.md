@@ -81,7 +81,10 @@ angular.module('notificationTest').controller('notificationController', function
   
   // Other Options
   // Success
-  Notification.success('Success notification');
+  Notification.success('Success notification');  
+  
+  // Message with custom type
+  Notification({message: 'Warning notification'}, 'warning');
   
   // With Title
   Notification({message: 'Primary notification', title: 'Primary notification'});
