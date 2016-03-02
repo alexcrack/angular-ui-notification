@@ -2,7 +2,7 @@
 exports.config = {
   allScriptsTimeout: 99999,
   // Do not start a Selenium Standalone sever - only run this using chrome.
-  directConnect: true,
+  //directConnect: true,
   //chromeDriver: './node_modules/protractor/selenium/chromedriver',
 
   seleniumArgs: ['-browserTimeout=60'],
