@@ -108,6 +108,7 @@ angular.module('ui-notification').provider('Notification', function() {
                     if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 1)){
                         templateElement.remove();
                         messageElements.splice(messageElements.indexOf(templateElement), 1);
+                        scope.$destroy();
                         reposite();
                     }
                 });
@@ -128,6 +129,7 @@ angular.module('ui-notification').provider('Notification', function() {
                     if (isHard) {
                         messageElements.splice(messageElements.indexOf(scope._templateElement), 1);
                         scope._templateElement.remove();
+                        scope.$destroy();
                         $timeout(reposite);
                     } else {
                         scope._templateElement.addClass('killed');
