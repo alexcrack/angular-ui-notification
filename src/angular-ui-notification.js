@@ -11,7 +11,8 @@ angular.module('ui-notification').provider('Notification', function() {
         positionX: 'right',
         positionY: 'top',
         replaceMessage: false,
-        templateUrl: 'angular-ui-notification.html'
+        templateUrl: 'angular-ui-notification.html',
+        container: 'body'
     };
 
     this.setOptions = function(options) {
@@ -45,6 +46,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
+            args.container = args.container ? args.container : options.container;
 
             $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -111,7 +113,7 @@ angular.module('ui-notification').provider('Notification', function() {
                     }, args.delay);
                 }
 
-                angular.element(document.getElementsByTagName('body')).append(templateElement);
+                angular.element(document.querySelector(args.container)).append(templateElement);
                 var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
