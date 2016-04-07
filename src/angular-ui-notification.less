@@ -5,11 +5,17 @@
     position: fixed;
     z-index: 9999;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
     width: 300px;
     color: @btn-primary-color;
     background: @brand-primary;
     .transition(all ease 0.5s);
+    &.clickable {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
     &.killed {
         opacity: 0;
         .transition(opacity ease 1s);
@@ -47,8 +53,5 @@
     &.info {
         color: @btn-info-color;
         background: @brand-info;
-    }
-    &:hover {
-        opacity: 0.7;
     }
 }
