@@ -129,6 +129,7 @@ The options list:
 | positionY         | "top", "bottom"           | "top"                          | Vertical position of the message                                         |
 | replaceMessage    | true, false               | false                          | If true every next appearing message replace old messages                |
 | templateUrl       | Any string                | "angular-ui-notification.html" | Custom template filename (URL)                                           |
+| onClose           | Any function              | undefined                      | Callback to execute when a notification element is closed. Callback receives the element as its argument. |
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 
@@ -160,7 +161,7 @@ Also you can pass the "scope" option. This is an angular scope option Notificati
 
 #### Returning value
 
-Every "show" method returns a promise resolves a notification scope with methods:
+Every "show" method returns a promise that resolves a notification scope with these methods:
 
 |          Method name           |                                                   Description                                                    |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------|

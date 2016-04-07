@@ -11,7 +11,8 @@ angular.module('ui-notification').provider('Notification', function() {
         positionX: 'right',
         positionY: 'top',
         replaceMessage: false,
-        templateUrl: 'angular-ui-notification.html'
+        templateUrl: 'angular-ui-notification.html',
+        onClose: undefined
     };
 
     this.setOptions = function(options) {
@@ -45,6 +46,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
+            args.onClose = args.onClose ? args.onClose : options.onClose;
 
             $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -53,6 +55,7 @@ angular.module('ui-notification').provider('Notification', function() {
                 scope.title = $sce.trustAsHtml(args.title);
                 scope.t = args.type.substr(0,1);
                 scope.delay = args.delay;
+                scope.onClose = args.onClose;
 
                 var reposite = function() {
                     var j = 0;
@@ -99,6 +102,10 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
                     e = e.originalEvent || e;
                     if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 1)){
+                        if (scope.onClose) {
+                            scope.$apply(scope.onClose(templateElement));
+                        }
+
                         templateElement.remove();
                         messageElements.splice(messageElements.indexOf(templateElement), 1);
                         scope.$destroy();
@@ -120,6 +127,10 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 scope.kill = function(isHard) {
                     if (isHard) {
+                        if (scope.onClose) {
+                            scope.$apply(scope.onClose(scope._templateElement));
+                        }
+
                         messageElements.splice(messageElements.indexOf(scope._templateElement), 1);
                         scope._templateElement.remove();
                         scope.$destroy();
