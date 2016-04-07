@@ -171,4 +171,16 @@ describe("E2E: call onClose callback", function() {
         });
 
     });
+
+    describe('Do not close on click', function() {
+
+        it('should leave message after clicking', function() {
+            element(by.css('button.btn-danger')).click();
+            expect(element.all(by.css('.ui-notification.error')).count()).toBe(1);
+
+            element(by.css('.ui-notification.error')).click();
+            expect(element.all(by.css('.ui-notification.error')).count()).toBe(1);
+        });
+
+    });
 });

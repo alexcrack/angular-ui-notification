@@ -19,7 +19,8 @@ angular.module('ui-notification').provider('Notification', function() {
         positionY: 'top',
         replaceMessage: false,
         templateUrl: 'angular-ui-notification.html',
-        onClose: undefined
+        onClose: undefined,
+        closeOnClick: true
     };
 
     this.setOptions = function(options) {
@@ -54,6 +55,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
             args.onClose = args.onClose ? args.onClose : options.onClose;
+            args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
 
             $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -106,7 +108,8 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement._positionY = args.positionY;
                 templateElement._positionX = args.positionX;
                 templateElement.addClass(args.type);
-                templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd click', function(e){
+
+                var closeEvent = function(e) {
                     e = e.originalEvent || e;
                     if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 1)){
                         if (scope.onClose) {
@@ -118,7 +121,15 @@ angular.module('ui-notification').provider('Notification', function() {
                         scope.$destroy();
                         reposite();
                     }
-                });
+                };
+
+                if (args.closeOnClick) {
+                    templateElement.addClass('clickable');
+                    templateElement.bind('click', closeEvent);
+                }
+
+                templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd', closeEvent);
+
                 if (angular.isNumber(args.delay)) {
                     $timeout(function() {
                         templateElement.addClass('killed');

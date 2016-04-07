@@ -15,6 +15,7 @@
         <h3>Types of notifications</h3>
         <div class="btn-group-vertical">
             <button class="btn btn-primary" ng-click="primary()">Show notification</button>
+            <button class="btn btn-danger" ng-click="danger()">Show unclosable notification</button>
         </div>
     </div>
     <div id="is-closed">{{hasElementClosed}}</div>
@@ -38,6 +39,14 @@
                         onClose: function(element) {
                             $scope.hasElementClosed = true;
                         }
+                    });
+                };
+
+                $scope.danger = function() {
+                    Notification.error({
+                        message: "Message won't close",
+                        delay: 5000,
+                        closeOnClick: false
                     });
                 };
 

@@ -81,11 +81,11 @@ angular.module('notificationTest').controller('notificationController', function
   
   // Other Options
   // Success
-  Notification.success('Success notification');  
+  Notification.success('Success notification');
   
   // Message with custom type
   Notification({message: 'Warning notification'}, 'warning');
-  
+
   // With Title
   Notification({message: 'Primary notification', title: 'Primary notification'});
   
@@ -130,6 +130,7 @@ The options list:
 | replaceMessage    | true, false               | false                          | If true every next appearing message replace old messages                |
 | templateUrl       | Any string                | "angular-ui-notification.html" | Custom template filename (URL)                                           |
 | onClose           | Any function              | undefined                      | Callback to execute when a notification element is closed. Callback receives the element as its argument. |
+| closeOnClick      | true, false               | true                           | If true, messages are closed on click                                    |
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 
@@ -158,6 +159,7 @@ Also you can pass the "scope" option. This is an angular scope option Notificati
 | positionY      | "top", "bottom"                                  | `"top"`                           |                                                                                                        |
 | positionX      | "right", "left", "center"                        | `"right"                          |                                                                                                        |
 | replaceMessage | *Boolean*                                        | `false`                           | If true this message will replace old(er) message(s)                                                   |
+| closeOnClick      | true, false               | true                           | If true, the message is closed on click                                  |
 
 #### Returning value
 
