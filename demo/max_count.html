@@ -1,0 +1,49 @@
+<html ng-app="notificationTest">
+<head>
+    <title>Notification demo</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Angular ui-notification demo</h1>
+</div>
+
+<div ng-controller="notificationController">
+    <div class="container">
+        <h3>Max count of notifications</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary" ng-click="primary()">Show notification</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+    angular.module('notificationTest', ['ui-notification']);
+
+    // Configuration
+    angular.module('notificationTest', ['ui-notification'])
+        .config(function(NotificationProvider) {
+            NotificationProvider.setOptions({
+                delay: 20000,
+                maxCount: 5
+            });
+        });
+
+    angular.module('notificationTest')
+
+        .controller('notificationController', function($scope, Notification) {
+
+            $scope.primary = function() {
+                Notification.primary("New message");
+            };
+
+        });
+
+</script>
+</body>
+</html>

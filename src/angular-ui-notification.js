@@ -13,7 +13,8 @@ angular.module('ui-notification').provider('Notification', function() {
         replaceMessage: false,
         templateUrl: 'angular-ui-notification.html',
         onClose: undefined,
-        closeOnClick: true
+        closeOnClick: true,
+        maxCount: 0 // 0 - Infinite
     };
 
     this.setOptions = function(options) {
@@ -92,6 +93,10 @@ angular.module('ui-notification').provider('Notification', function() {
                         }
 
                         lastPosition[element._positionY+element._positionX] = top + elHeight;
+
+                        if (options.maxCount > 0 && messageElements.length > options.maxCount && i === 0) {
+                            element.scope().kill(true);
+                        }
 
                         j ++;
                     }

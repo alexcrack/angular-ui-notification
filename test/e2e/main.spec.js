@@ -184,3 +184,23 @@ describe("E2E: call onClose callback", function() {
 
     });
 });
+
+describe("E2E: Max count", function() {
+    beforeEach(function() {
+        browser.ignoreSynchronization = true;
+        browser.driver.get('http://localhost:8080/max_count.html');
+    });
+
+    describe('Click many times but messages less than max count', function() {
+
+        it('should click 20 times but messages should be less than 5', function() {
+            for (var i = 0; i < 20; i++) {
+                // Click 20 times
+                element(by.css('button.btn-primary')).click();
+            }
+
+            expect(element.all(by.css('.ui-notification')).count()).toBe(5);
+        });
+
+    });
+});
