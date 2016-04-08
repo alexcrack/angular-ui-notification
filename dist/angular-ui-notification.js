@@ -136,10 +136,27 @@ angular.module('ui-notification').provider('Notification', function() {
                     }, args.delay);
                 }
 
+                setCssTransitions('none');
+
                 angular.element(document.getElementsByTagName('body')).append(templateElement);
                 var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
+
+                if(args.positionX == 'center'){
+                    var elWidth = parseInt(templateElement[0].offsetWidth);
+                    templateElement.css('left', parseInt(window.innerWidth / 2 - elWidth / 2) + 'px');
+                }
+
+                $timeout(function(){
+                    setCssTransitions('');
+                });
+
+                function setCssTransitions(value){
+                    ['-webkit-transition', '-o-transition', 'transition'].forEach(function(prefix){
+                        templateElement.css(prefix, value);
+                    });
+                }
 
                 scope._templateElement = templateElement;
 

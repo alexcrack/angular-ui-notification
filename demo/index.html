@@ -52,6 +52,8 @@
                     <button class="btn btn-success" ng-click="TopLeft()">Top Left Notification</button>
                     <button class="btn btn-danger" ng-click="BottomRight()">Bottom Right Notification</button>
                     <button class="btn btn-warning" ng-click="BottomLeft()">Bottom Left Notification</button>
+                    <button class="btn btn-success" ng-click="TopCenter()">Top Center Notification</button>
+                    <button class="btn btn-danger" ng-click="BottomCenter()">Bottom Center Notification</button>
                 </div>
             </div>
 
@@ -153,6 +155,14 @@
 
                 $scope.BottomLeft = function() {
                     Notification.warning({message: 'warning Bottom Left', positionY: 'bottom', positionX: 'left'});
+                };
+
+                $scope.TopCenter = function() {
+                    Notification.success({message: 'Success Top Center', positionX: 'center'});
+                };
+
+                $scope.BottomCenter = function() {
+                    Notification.error({message: 'Error Bottom Center', positionY: 'bottom', positionX: 'center'});
                 };
 
                 // == 
