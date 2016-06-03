@@ -22,7 +22,8 @@ angular.module('ui-notification').provider('Notification', function() {
         this.options = angular.extend({}, this.options, options);
     };
 
-    this.$get = function($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q, $window) {
+    this.$get = ['$timeout', '$http', '$compile', '$templateCache', '$rootScope', '$injector', '$sce', '$q', '$window', 
+        function ($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q, $window) {
         var options = this.options;
 
         var startTop = options.startTop;
@@ -214,5 +215,5 @@ angular.module('ui-notification').provider('Notification', function() {
         };
 
         return notify;
-    };
+    }];
 });
