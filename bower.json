@@ -30,6 +30,9 @@
     "demo",
     "build"
   ],
+  "dependencies": {
+    "angular": "~1.2.23"
+  },
   "devDependencies": {
     "bootstrap": "~3.3.2"
   }
