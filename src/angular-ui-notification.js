@@ -22,7 +22,7 @@ angular.module('ui-notification').provider('Notification', function() {
         this.options = angular.extend({}, this.options, options);
     };
 
-    this.$get = function($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q, $window) {
+    this.$get = function($interval, $timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce, $q, $window) {
         var options = this.options;
 
         var startTop = options.startTop;
@@ -129,9 +129,9 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd', closeEvent);
 
                 if (angular.isNumber(args.delay)) {
-                    $timeout(function() {
+                    $interval(function() {
                         templateElement.addClass('killed');
-                    }, args.delay);
+                    }, args.delay, 1);
                 }
 
                 setCssTransitions('none');
