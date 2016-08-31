@@ -203,3 +203,21 @@ describe("E2E: Max count", function() {
 
     });
 });
+
+describe("E2E: check if protractor don't wait $timeout after calling clearAll", function() {
+    beforeEach(function() {
+        browser.ignoreSynchronization = true;
+        browser.driver.get('http://localhost:8080/clear_all.html');
+    });
+
+    describe('Click on button should generate several notifications and kill them al after 1 sec', function() {
+
+        it("should click on button and check if all message disappears", function() {
+            element(by.css('button.btn-success.clear-all')).click();
+            expect(element.all(by.css('.ui-notification')).count()).toBe(3);
+            browser.sleep(1200);
+            browser.ignoreSynchronization = false; // protractor shouldn't wait 10 secs
+        });
+
+    })
+});

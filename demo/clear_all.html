@@ -1,0 +1,51 @@
+<html ng-app="notificationTest">
+<head>
+    <title>Notification demo (kill message)</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Angular ui-notification demo (clear all messages)</h1>
+</div>
+
+<div ng-controller="notificationController">
+
+    <div class="container">
+        <h3>Clear All messages</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-success clear-all" ng-click="clearAllMessages()">Clear all message with fadeout</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+    angular.module('notificationTest', ['ui-notification'])
+            .config(function(NotificationProvider) {
+                NotificationProvider.setOptions({
+                    delay: 10000,
+                });
+            });
+
+    angular.module('notificationTest')
+
+            .controller('notificationController', function($scope, Notification, $timeout) {
+
+                $scope.clearAllMessages = function() {
+                    Notification.warning("Message should be cleared");
+                    var test = Notification.primary("Message should be cleared too...");
+                    Notification.info("This message also should be cleared");
+
+                    $timeout(function() {
+                        Notification.clearAll();
+                    }, 1000);
+                };
+
+            });
+</script>
+</body>
+</html>

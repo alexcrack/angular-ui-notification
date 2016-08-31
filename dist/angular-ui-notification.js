@@ -9,6 +9,8 @@ angular.module('ui-notification',[]);
 
 angular.module('ui-notification').provider('Notification', function() {
 
+    var $timeoutPromises = [];
+
     this.options = {
         delay: 5000,
         startTop: 10,
@@ -136,9 +138,14 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement.bind('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd', closeEvent);
 
                 if (angular.isNumber(args.delay)) {
-                    $timeout(function() {
+                    var $timeoutPromise = $timeout(function() {
                         templateElement.addClass('killed');
+                        var promiseIndex = $timeoutPromises.indexOf($timeoutPromise);
+                        if(promiseIndex !== -1) {
+                            $timeoutPromises.splice(promiseIndex, 1);
+                        }
                     }, args.delay);
+                    $timeoutPromises.push($timeoutPromise);
                 }
 
                 setCssTransitions('none');
@@ -218,6 +225,10 @@ angular.module('ui-notification').provider('Notification', function() {
             angular.forEach(messageElements, function(element) {
                 element.addClass('killed');
             });
+            angular.forEach($timeoutPromises, function($timeoutPromise) {
+                $timeout.cancel($timeoutPromise);
+            });
+            $timeoutPromises = [];
         };
 
         return notify;
