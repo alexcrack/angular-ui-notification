@@ -38,7 +38,7 @@ angular.module('ui-notification').provider('Notification', function() {
         var notify = function(args, t){
             var deferred = $q.defer();
 
-            if (typeof args !== 'object') {
+            if (typeof args !== 'object' || args === null) {
                 args = {message:args};
             }
 
