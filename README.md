@@ -132,6 +132,7 @@ The options list:
 | onClose           | Any function              | undefined                      | Callback to execute when a notification element is closed. Callback receives the element as its argument. |
 | closeOnClick      | true, false               | true                           | If true, messages are closed on click                                    |
 | maxCount          | Any integer               | 0                              | Show only [maxCount] last messages. Old messages will be killed. 0 - do not kill |
+| priority          | Any integer               | 10                             | The highier the priority is, the higher the notification will be         |
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 
