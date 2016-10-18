@@ -15,7 +15,8 @@ angular.module('ui-notification').provider('Notification', function() {
         onClose: undefined,
         closeOnClick: true,
         maxCount: 0, // 0 - Infinite
-        container: 'body'
+        container: 'body',
+        priority: 10
     };
 
     this.setOptions = function(options) {
@@ -52,6 +53,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.onClose = args.onClose ? args.onClose : options.onClose;
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
+            args.priority = args.priority ? args.priority : options.priority;
 
             $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
@@ -62,12 +64,27 @@ angular.module('ui-notification').provider('Notification', function() {
                 scope.delay = args.delay;
                 scope.onClose = args.onClose;
 
+                var priorityCompareTop = function(a, b) {
+                    return a._priority - b._priority;
+                };
+
+                var priorityCompareBtm = function(a, b) {
+                    return b._priority - a._priority;
+                };
+
                 var reposite = function() {
                     var j = 0;
                     var k = 0;
                     var lastTop = startTop;
                     var lastRight = startRight;
                     var lastPosition = [];
+
+                    if( args.positionX === 'top' ) {
+                        messageElements.sort( priorityCompareTop );
+                    } else if( args.positionY === 'bottom' ) {
+                        messageElements.sort( priorityCompareBtm );
+                    }
+
                     for(var i = messageElements.length - 1; i >= 0; i --) {
                         var element  = messageElements[i];
                         if (args.replaceMessage && i < messageElements.length - 1) {
@@ -107,6 +124,7 @@ angular.module('ui-notification').provider('Notification', function() {
                 var templateElement = $compile(template)(scope);
                 templateElement._positionY = args.positionY;
                 templateElement._positionX = args.positionX;
+                templateElement._priority = args.priority;
                 templateElement.addClass(args.type);
 
                 var closeEvent = function(e) {
