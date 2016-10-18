@@ -79,7 +79,7 @@ angular.module('ui-notification').provider('Notification', function() {
                     var lastRight = startRight;
                     var lastPosition = [];
 
-                    if( args.positionX === 'top' ) {
+                    if( args.positionY === 'top' ) {
                         messageElements.sort( priorityCompareTop );
                     } else if( args.positionY === 'bottom' ) {
                         messageElements.sort( priorityCompareBtm );
