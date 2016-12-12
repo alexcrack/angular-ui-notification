@@ -55,9 +55,8 @@ angular.module('ui-notification').provider('Notification', function() {
 
             if(args.template!='angular-ui-notification.html'){
                 // load it via $http only if it isn't default template
-                $http.get(args.template,{cache: $templateCache})
-                    .success(processNotificationTemplate(loadedTemplate))
-                    .error(function(data){
+                $http.get(args.template,{cache: $templateCache}).then(processNotificationTemplate(loadedTemplate),
+                    function(data){
                         throw new Error('Template ('+args.template+') could not be loaded. ' + data);
                     });
             }else{
