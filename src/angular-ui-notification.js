@@ -53,7 +53,27 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
 
-            $http.get(args.template,{cache: $templateCache}).success(function(template) {
+            if(args.template!='angular-ui-notification.html'){
+                // load it via $http only if it isn't default template
+                $http.get(args.template,{cache: $templateCache})
+                    .success(processNotificationTemplate(loadedTemplate))
+                    .error(function(data){
+                        throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+                    });
+            }else{
+                // load directly form $templateCache! to make it working on pages loaded like file:// specifically for cordova
+                var template=$templateCache.get('angular-ui-notification.html');
+                if(template){
+                    processNotificationTemplate(template);
+                }else{
+                    // means something really broken if we are unable to load default template
+                    throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+                }
+                
+            }    
+            
+            
+             function processNotificationTemplate(template) {
 
                 var scope = args.scope.$new();
                 scope.message = $sce.trustAsHtml(args.message);
@@ -138,7 +158,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 setCssTransitions('none');
 
-                angular.element(document.querySelector(args.container)).append(templateElement);
+                angular.element(document.getElementsByTagName('body')).append(templateElement);
                 var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
@@ -186,9 +206,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 deferred.resolve(scope);
 
-            }).error(function(data){
-                throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-            });
+            }
 
             return deferred.promise;
         };
