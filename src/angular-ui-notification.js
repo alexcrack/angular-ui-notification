@@ -55,10 +55,11 @@ angular.module('ui-notification').provider('Notification', function() {
 
             if(args.template!='angular-ui-notification.html'){
                 // load it via $http only if it isn't default template
-                $http.get(args.template,{cache: $templateCache}).then(processNotificationTemplate(loadedTemplate),
-                    function(data){
-                        throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                    });
+                $http.get(args.template,{cache: $templateCache})
+                  .then(processNotificationTemplate)
+                  .catch(function(data){
+                    throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+                  });
             }else{
                 // load directly form $templateCache! to make it working on pages loaded like file:// specifically for cordova
                 var template=$templateCache.get('angular-ui-notification.html');
