@@ -1,7 +1,7 @@
 /**
  * angular-ui-notification - Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating
  * @author Alex_Crack
- * @version v0.3.2
+ * @version v0.3.5
  * @link https://github.com/alexcrack/angular-ui-notification
  * @license MIT
  */
@@ -59,24 +59,19 @@ angular.module('ui-notification').provider('Notification', function() {
             args.onClose = args.onClose ? args.onClose : options.onClose;
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
+            
+            var template=$templateCache.get(args.template);
 
-            if(args.template!='angular-ui-notification.html'){
-                // load it via $http only if it isn't default template
-                $http.get(args.template,{cache: $templateCache})
+            if(template){
+                processNotificationTemplate(template);
+            }else{
+                // load it via $http only if it isn't default template and template isn't exist in template cache
+                // cache:true means cache it for later access.
+                $http.get(args.template,{cache: true})
                   .then(processNotificationTemplate)
                   .catch(function(data){
                     throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                  });
-            }else{
-                // load directly form $templateCache! to make it working on pages loaded like file:// specifically for cordova
-                var template=$templateCache.get('angular-ui-notification.html');
-                if(template){
-                    processNotificationTemplate(template);
-                }else{
-                    // means something really broken if we are unable to load default template
-                    throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                }
-                
+                  });                
             }    
             
             
