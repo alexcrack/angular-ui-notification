@@ -160,7 +160,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 setCssTransitions('none');
 
-                angular.element(document.getElementsByTagName('body')).append(templateElement);
+                angular.element(document.querySelector(args.container)).append(templateElement);
                 var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
