@@ -53,8 +53,8 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
 
-            $http.get(args.template,{cache: $templateCache}).success(function(template) {
-
+            $http.get(args.template,{cache: $templateCache}).then(function success(result) {
+                var template = result.data;
                 var scope = args.scope.$new();
                 scope.message = $sce.trustAsHtml(args.message);
                 scope.title = $sce.trustAsHtml(args.title);
@@ -186,8 +186,8 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 deferred.resolve(scope);
 
-            }).error(function(data){
-                throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+            }, function error(result){
+                throw new Error('Template ('+args.template+') could not be loaded. ' + result.data);
             });
 
             return deferred.promise;
