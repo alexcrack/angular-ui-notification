@@ -45,15 +45,30 @@ angular.module('ui-notification').provider('Notification', function() {
             args.scope = args.scope ? args.scope : $rootScope;
             args.template = args.templateUrl ? args.templateUrl : options.templateUrl;
             args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
-            args.type = t || options.type ||  '';
+            args.type = t || args.type || options.type ||  '';
             args.positionY = args.positionY ? args.positionY : options.positionY;
             args.positionX = args.positionX ? args.positionX : options.positionX;
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
             args.onClose = args.onClose ? args.onClose : options.onClose;
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
+            
+            var template=$templateCache.get(args.template);
 
-            $http.get(args.template,{cache: $templateCache}).success(function(template) {
+            if(template){
+                processNotificationTemplate(template);
+            }else{
+                // load it via $http only if it isn't default template and template isn't exist in template cache
+                // cache:true means cache it for later access.
+                $http.get(args.template,{cache: true})
+                  .then(processNotificationTemplate)
+                  .catch(function(data){
+                    throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+                  });                
+            }    
+            
+            
+             function processNotificationTemplate(template) {
 
                 var scope = args.scope.$new();
                 scope.message = $sce.trustAsHtml(args.message);
@@ -186,9 +201,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 deferred.resolve(scope);
 
-            }).error(function(data){
-                throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-            });
+            }
 
             return deferred.promise;
         };
