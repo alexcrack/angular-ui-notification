@@ -193,8 +193,8 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 deferred.resolve(scope);
 
-            }, function error(data){
-                throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+            }, function error(result){
+                throw new Error('Template ('+args.template+') could not be loaded. ' + result.data);
             });
 
             return deferred.promise;
