@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="notificationTest">
+<head>
+    <title>Notification demo (custom configuration)</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Notification demo (custom configuration)</h1>
+</div>
+
+<div ng-controller="notificationController">
+    <div class="container">
+        <h3>Types of notifications</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-danger" ng-click="highPriority()">Notification with high priority</button>
+            <button class="btn btn-primary" ng-click="mediumPriority()">Notification with medium priority</button>
+            <button class="btn btn-success" ng-click="lowPriority()">Notification with low priority</button>
+        </div>
+    </div>
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+    // Configuration
+    angular.module('notificationTest', ['ui-notification'])
+        .config(function(NotificationProvider) {
+            NotificationProvider.setOptions({
+                delay: 10000,
+                startTop: 20,
+                startRight: 10,
+                verticalSpacing: 20,
+                horizontalSpacing: 20,
+                positionX: 'center',
+                positionY: 'bottom'
+            });
+        });
+
+    angular.module('notificationTest')
+        .controller('notificationController', function($scope, Notification) {
+            $scope.mediumPriority = function() {
+                Notification({
+                    message: "Notification with medium priority",
+                    delay: 3000
+                });
+            };
+
+            $scope.highPriority = function() {
+                Notification.error({
+                    message: "Notification with high priority",
+                    delay: 4000,
+                    priority: 15
+                });
+            };
+
+            $scope.lowPriority = function() {
+                Notification.success({
+                    message: "Notification with low priority",
+                    delay: 2000,
+                    priority: 5
+                });
+            };
+        });
+
+</script>
+</body>
+</html>
