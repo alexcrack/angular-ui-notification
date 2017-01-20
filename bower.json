@@ -1,6 +1,6 @@
 {
   "name": "angular-ui-notification",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "homepage": "https://github.com/alexcrack/angular-ui-notification",
   "repository": {
     "type": "git",
@@ -31,9 +31,9 @@
     "build"
   ],
   "dependencies": {
-    "angular": "~1.2.23"
+    "angular": "^1.5.x"
   },
   "devDependencies": {
-    "bootstrap": "~3.3.2"
+    "bootstrap": "^3.3.x"
   }
 }
