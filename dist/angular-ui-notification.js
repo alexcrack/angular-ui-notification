@@ -23,7 +23,8 @@ angular.module('ui-notification').provider('Notification', function() {
         closeOnClick: true,
         maxCount: 0, // 0 - Infinite
         container: 'body',
-        priority: 10
+        priority: 10,
+        slideFromSide: false
     };
 
     this.setOptions = function(options) {
@@ -61,6 +62,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
+            args.slideFromSide = (args.slideFromSide !==null && args.slideFromSide !==undefined) ? args.slideFromSide : options.slideFromSide;
             
             var template=$templateCache.get(args.template);
 
@@ -184,6 +186,11 @@ angular.module('ui-notification').provider('Notification', function() {
                 var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
+
+                if (args.slideFromSide){ 
+                    templateElement.addClass('slide-from-'+args.positionX); 
+                    templateElement.css(args.positionY,startTop+'px');
+                } 
 
                 if(args.positionX == 'center'){
                     var elWidth = parseInt(templateElement[0].offsetWidth);
