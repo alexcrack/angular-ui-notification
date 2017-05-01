@@ -1,183 +1,191 @@
 <html ng-app="notificationTest">
-    <head>
-        <title>Notification demo</title>
-        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-        <link rel="stylesheet" href="angular-csp.css">
-        <link rel="stylesheet" href="angular-ui-notification.min.css">
-    </head>
-    <body>
-        <div class="container">
-            <h1>Angular ui-notification demo</h1>
+<head>
+    <title>Notification demo</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="angular-csp.css">
+    <link rel="stylesheet" href="angular-ui-notification.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Angular ui-notification demo</h1>
+</div>
+
+<div ng-controller="notificationController">
+    <div class="container">
+        <h3>Types of notifications</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary" ng-click="primary()">Primary Notification</button>
+            <button class="btn btn-danger" ng-click="error()">Error Notification</button>
+            <button class="btn btn-success" ng-click="success()">Success Notification</button>
+            <button class="btn btn-info" ng-click="info()">Information Notification</button>
+            <button class="btn btn-warning" ng-click="warning()">Warning Notification</button>
         </div>
+    </div>
 
-        <div ng-controller="notificationController">
-            <div class="container">
-                <h3>Types of notifications</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-primary" ng-click="primary()">Primary Notification</button>
-                    <button class="btn btn-danger" ng-click="error()">Error Notification</button>
-                    <button class="btn btn-success" ng-click="success()">Success Notification</button>
-                    <button class="btn btn-info" ng-click="info()">Information Notification</button>
-                    <button class="btn btn-warning" ng-click="warning()">Warning Notification</button>
-                </div>
-            </div>
-
-            <div class="container">
-                <h3>Notification with title</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-primary" ng-click="primaryTitle()">Primary Notification</button>
-                </div>
-            </div>
-
-            <div class="container">
-                <h3>Custom show delay</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
-                    <button class="btn btn-danger" ng-click="errorNoTime()">Error Notification (no timeout)</button>
-                    <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
-                </div>
-            </div>
-
-            <div class="container">
-                <h3>Using html tags within message and title</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
-                    <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
-                </div>
-            </div>
-
-            <div class="container">
-                <h3>Change position notification</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-success" ng-click="TopLeft()">Top Left Notification</button>
-                    <button class="btn btn-danger" ng-click="BottomRight()">Bottom Right Notification</button>
-                    <button class="btn btn-warning" ng-click="BottomLeft()">Bottom Left Notification</button>
-                    <button class="btn btn-success" ng-click="TopCenter()">Top Center Notification</button>
-                    <button class="btn btn-danger" ng-click="BottomCenter()">Bottom Center Notification</button>
-                </div>
-            </div>
-
-            <div class="container">
-                <h3>Custom template and scope</h3>
-                <div class="btn-group-vertical">
-                    <button class="btn btn-primary show-custom" ng-click="customTemplateScope()">Custom template and scope</button>
-                </div>
-                <h5>Clicks: {{nClicksLog.length}}</h5>
-                <ul class="elements-count">
-                    <li ng-repeat="l in nClicksLog track by $index">{{$index + 1}}. {{l}}</li>
-                </ul>
-            </div>
-
+    <div class="container">
+        <h3>Notification with title</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary" ng-click="primaryTitle()">Primary Notification</button>
         </div>
+    </div>
 
-        <script type="text/ng-template" id="custom_template.html">
-            <div class="ui-notification custom-template">
-                <h3>{{nTitle}}</h3>
-                <div class="message" ng-bind-html="message"></div>
-                <div class="message">
-                    <ul>
-                        <li ng-repeat="el in nElements">{{el}}</li>
-                    </ul>
-                </div>
-                <div class="message">
-                    <a class="btn btn-small btn-primary close-notification" ng-click="nClick()">Click me</a>
-                </div>
-            </div>
-        </script>
+    <div class="container">
+        <h3>Custom show delay</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
+            <button class="btn btn-danger" ng-click="errorNoTime()">Error Notification (no timeout)</button>
+            <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
+        </div>
+    </div>
 
-        <script src="angular.min.js"></script>
-        <script src="angular-ui-notification.min.js"></script>  
-        <script type="text/javascript">
-            angular.module('notificationTest', ['ui-notification']);
+    <div class="container">
+        <h3>Using html tags within message and title</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
+            <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
+        </div>
+    </div>
 
-            angular.module('notificationTest')
+    <div class="container">
+        <h3>Change position notification</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-success" ng-click="TopLeft()">Top Left Notification</button>
+            <button class="btn btn-danger" ng-click="BottomRight()">Bottom Right Notification</button>
+            <button class="btn btn-warning" ng-click="BottomLeft()">Bottom Left Notification</button>
+            <button class="btn btn-success" ng-click="TopCenter()">Top Center Notification</button>
+            <button class="btn btn-danger" ng-click="BottomCenter()">Bottom Center Notification</button>
+        </div>
+    </div>
 
-            .controller('notificationController', function($scope, Notification) {
-                
-                $scope.primary = function() {
-                    Notification('Primary notification');
-                };
+    <div class="container">
+        <h3>Custom template and scope</h3>
+        <div class="btn-group-vertical">
+            <button class="btn btn-primary show-custom" ng-click="customTemplateScope()">Custom template and scope
+            </button>
+        </div>
+        <h5>Clicks: {{nClicksLog.length}}</h5>
+        <ul class="elements-count">
+            <li ng-repeat="l in nClicksLog track by $index">{{$index + 1}}. {{l}}</li>
+        </ul>
+    </div>
 
-                $scope.error = function() {
-                    Notification.error('Error notification');
-                };
+</div>
 
-                $scope.success = function() {
-                    Notification.success('Success notification');
-                };
+<script type="text/ng-template" id="custom_template.html">
+    <div class="ui-notification custom-template">
+        <h3>{{nTitle}}</h3>
+        <div class="message" ng-bind-html="message"></div>
+        <div class="message">
+            <ul>
+                <li ng-repeat="el in nElements">{{el}}</li>
+            </ul>
+        </div>
+        <div class="message">
+            <a class="btn btn-small btn-primary close-notification" ng-click="nClick()">Click me</a>
+        </div>
+    </div>
+</script>
 
-                $scope.info = function() {
-                    Notification.info('Information notification');
-                };
+<script src="angular.min.js"></script>
+<script src="angular-ui-notification.min.js"></script>
+<script type="text/javascript">
+  angular.module('notificationTest', ['ui-notification']);
 
-                $scope.warning = function() {
-                    Notification.warning('Warning notification');
-                };
+  angular.module('notificationTest')
 
-                // ==
+    .controller('notificationController', function ($scope, Notification) {
 
-                $scope.primaryTitle = function() {
-                    Notification({message: 'Primary notification', title: 'Primary notification'});
-                };
+      $scope.primary = function () {
+        Notification('Primary notification');
+      };
 
-                // ==
+      $scope.error = function () {
+        Notification.error('Error notification');
+      };
 
-                $scope.errorTime = function() {
-                    Notification.error({message: 'Error notification 1s', delay: 1000});
-                };
-                $scope.errorNoTime = function() {
-                    Notification.error({message: 'Error notification (no timeout)', delay: null});
-                };
+      $scope.success = function () {
+        Notification.success('Success notification');
+      };
 
-                $scope.successTime = function() {
-                    Notification.success({message: 'Success notification 20s', delay: 20000});
-                };
+      $scope.info = function () {
+        Notification.info('Information notification');
+      };
 
-                // ==
+      $scope.warning = function () {
+        Notification.warning('Warning notification');
+      };
 
-                $scope.errorHtml = function() {
-                    Notification.error({message: '<b>Error</b> <s>notification</s>', title: '<i>Html</i> <u>message</u>'});
-                };
+      // ==
 
-                $scope.successHtml = function() {
-                    Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
-                };
+      $scope.primaryTitle = function () {
+        Notification({message: 'Primary notification', title: 'Primary notification'});
+      };
 
-                // ==
+      // ==
 
-                $scope.TopLeft = function() {
-                    Notification.success({message: 'Success Top Left', positionX: 'left'});
-                };
+      $scope.errorTime = function () {
+        Notification.error({message: 'Error notification 1s', delay: 1000});
+      };
+      $scope.errorNoTime = function () {
+        Notification.error({
+          message: 'Error notification (no timeout)', delay: null, onClick: function (params) {
+            console.log(params);
+          }
+        });
+      };
 
-                $scope.BottomRight = function() {
-                    Notification.error({message: 'Error Bottom Right', positionY: 'bottom', positionX: 'right'});
-                };
+      $scope.successTime = function () {
+        Notification.success({message: 'Success notification 20s', delay: 20000});
+      };
 
-                $scope.BottomLeft = function() {
-                    Notification.warning({message: 'warning Bottom Left', positionY: 'bottom', positionX: 'left'});
-                };
+      // ==
 
-                $scope.TopCenter = function() {
-                    Notification.success({message: 'Success Top Center', positionX: 'center'});
-                };
+      $scope.errorHtml = function () {
+        Notification.error({message: '<b>Error</b> <s>notification</s>', title: '<i>Html</i> <u>message</u>'});
+      };
 
-                $scope.BottomCenter = function() {
-                    Notification.error({message: 'Error Bottom Center', positionY: 'bottom', positionX: 'center'});
-                };
+      $scope.successHtml = function () {
+        Notification.success({
+          message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">',
+          title: 'Html content'
+        });
+      };
 
-                // == 
+      // ==
 
-                $scope.nTitle = "Title from other scope";
-                $scope.nClicksLog = [];
-                $scope.nClick = function() {
-                    $scope.nClicksLog.push("Clicked");
-                };
-                $scope.nElements = ['one', 'two', 'three'];
-                $scope.customTemplateScope = function() {
-                    Notification.primary({message: "Just message", templateUrl: "custom_template.html", scope: $scope});
-                };
+      $scope.TopLeft = function () {
+        Notification.success({message: 'Success Top Left', positionX: 'left'});
+      };
 
-            });
-        </script>
-    </body>
+      $scope.BottomRight = function () {
+        Notification.error({message: 'Error Bottom Right', positionY: 'bottom', positionX: 'right'});
+      };
+
+      $scope.BottomLeft = function () {
+        Notification.warning({message: 'warning Bottom Left', positionY: 'bottom', positionX: 'left'});
+      };
+
+      $scope.TopCenter = function () {
+        Notification.success({message: 'Success Top Center', positionX: 'center'});
+      };
+
+      $scope.BottomCenter = function () {
+        Notification.error({message: 'Error Bottom Center', positionY: 'bottom', positionX: 'center'});
+      };
+
+      // ==
+
+      $scope.nTitle = "Title from other scope";
+      $scope.nClicksLog = [];
+      $scope.nClick = function () {
+        $scope.nClicksLog.push("Clicked");
+      };
+      $scope.nElements = ['one', 'two', 'three'];
+      $scope.customTemplateScope = function () {
+        Notification.primary({message: "Just message", templateUrl: "custom_template.html", scope: $scope});
+      };
+
+    });
+</script>
+</body>
 </html>
