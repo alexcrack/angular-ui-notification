@@ -182,7 +182,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 if (args.slideFromSide){ 
                     templateElement.addClass('slide-from-'+args.positionX); 
-                    templateElement.css(args.positionY,startTop+'px')
+                    templateElement.css(args.positionY,startTop+'px');
                 } 
 
                 if(args.positionX == 'center'){
