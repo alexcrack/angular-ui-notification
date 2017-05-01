@@ -37,6 +37,14 @@
 
     opacity: 0;
 }
+.ui-notification.slide-from-left
+{
+    left: -375px;
+}
+.ui-notification.slide-from-right
+{
+    right: -375px;
+}
 .ui-notification > h3
 {
     font-size: 14px;
