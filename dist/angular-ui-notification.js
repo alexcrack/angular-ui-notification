@@ -42,8 +42,9 @@ angular.module('ui-notification').provider('Notification', function() {
 
         var messageElements = [];
         var isResizeBound = false;
+        var notificationTypes = ['primary', 'error', 'success', 'info', 'warning'];
 
-        var notify = function(args, t){
+        var notify = function(t, args){
             var deferred = $q.defer();
 
             if (typeof args !== 'object' || args === null) {
@@ -61,7 +62,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
-            
+
             var template=$templateCache.get(args.template);
 
             if(template){
@@ -75,10 +76,10 @@ angular.module('ui-notification').provider('Notification', function() {
                   })
                   .catch(function(data){
                     throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                  });                
-            }    
-            
-            
+                  });
+            }
+
+
              function processNotificationTemplate(template) {
 
                 var scope = args.scope.$new();
@@ -233,21 +234,9 @@ angular.module('ui-notification').provider('Notification', function() {
             return deferred.promise;
         };
 
-        notify.primary = function(args) {
-            return this(args, 'primary');
-        };
-        notify.error = function(args) {
-            return this(args, 'error');
-        };
-        notify.success = function(args) {
-            return this(args, 'success');
-        };
-        notify.info = function(args) {
-            return this(args, 'info');
-        };
-        notify.warning = function(args) {
-            return this(args, 'warning');
-        };
+        notificationTypes.forEach(function (type) {
+            notify[type] = notify.bind(this, type);
+        });
 
         notify.clearAll = function() {
             angular.forEach(messageElements, function(element) {
