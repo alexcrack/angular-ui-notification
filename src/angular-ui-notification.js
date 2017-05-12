@@ -54,7 +54,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
-            
+
             var template=$templateCache.get(args.template);
 
             if(template){
@@ -68,10 +68,10 @@ angular.module('ui-notification').provider('Notification', function() {
                   })
                   .catch(function(data){
                     throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                  });                
-            }    
-            
-            
+                  });
+            }
+
+
              function processNotificationTemplate(template) {
 
                 var scope = args.scope.$new();
@@ -197,13 +197,15 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 scope.kill = function(isHard) {
                     if (isHard) {
-                        if (scope.onClose) {
-                            scope.$apply(scope.onClose(scope._templateElement));
-                        }
+                        scope.$applyAsync(function() {
+                            if (scope.onClose) {
+                                scope.onClose(scope._templateElement);
+                            }
+                            messageElements.splice(messageElements.indexOf(scope._templateElement), 1);
+                            scope._templateElement.remove();
+                            scope.$destroy();
+                        });
 
-                        messageElements.splice(messageElements.indexOf(scope._templateElement), 1);
-                        scope._templateElement.remove();
-                        scope.$destroy();
                         $timeout(reposite);
                     } else {
                         scope._templateElement.addClass('killed');
