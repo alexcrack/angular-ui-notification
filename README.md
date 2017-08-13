@@ -159,7 +159,7 @@ Also you can pass the "scope" option. This is an angular scope option Notificati
 | delay          | *Int* (?)                                        | `5000` or configured global delay | Number of ms before notification fades out. If not an integer, notification will persist until killed. |
 | type           | "primary", "info", "success", "warning", "error" | `"primary"`                       | Bootstrap flavoring                                                                                    |
 | positionY      | "top", "bottom"                                  | `"top"`                           |                                                                                                        |
-| positionX      | "right", "left", "center"                        | `"right"                          |                                                                                                        |
+| positionX      | "right", "left", "center"                        | "right"                          |                                                                                                        |
 | replaceMessage | *Boolean*                                        | `false`                           | If true this message will replace old(er) message(s)                                                   |
 | closeOnClick      | true, false               | true                           | If true, the message is closed on click                                  |
 
