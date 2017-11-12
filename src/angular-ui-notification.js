@@ -16,7 +16,8 @@ angular.module('ui-notification').provider('Notification', function() {
         closeOnClick: true,
         maxCount: 0, // 0 - Infinite
         container: 'body',
-        priority: 10
+        priority: 10,
+        classes: []
     };
 
     this.setOptions = function(options) {
@@ -54,7 +55,8 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
-            
+            args.classes = args.classes ? (Array.isArray(args.classes)?args.classes:[args.classes]): options.classes;
+
             var template=$templateCache.get(args.template);
 
             if(template){
@@ -143,6 +145,10 @@ angular.module('ui-notification').provider('Notification', function() {
                 templateElement._positionX = args.positionX;
                 templateElement._priority = args.priority;
                 templateElement.addClass(args.type);
+                args.classes.forEach(function(item) {
+                    templateElement.addClass(item);
+                });
+
 
                 var closeEvent = function(e) {
                     e = e.originalEvent || e;
