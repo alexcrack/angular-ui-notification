@@ -133,6 +133,7 @@ The options list:
 | closeOnClick      | true, false               | true                           | If true, messages are closed on click                                    |
 | maxCount          | Any integer               | 0                              | Show only [maxCount] last messages. Old messages will be killed. 0 - do not kill |
 | priority          | Any integer               | 10                             | The highier the priority is, the higher the notification will be         |
+| classes           | Any string or array of it | []                             | a classes that can be added to the whole notification div                |
 
 Also you can pass the "scope" option. This is an angular scope option Notification scope will be inherited from. This option can be passed only in the methods. The default value is $rootScope
 
