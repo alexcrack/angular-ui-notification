@@ -61,7 +61,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
-            
+
             var template=$templateCache.get(args.template);
 
             if(template){
@@ -75,10 +75,10 @@ angular.module('ui-notification').provider('Notification', function() {
                   })
                   .catch(function(data){
                     throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                  });                
-            }    
-            
-            
+                  });
+            }
+
+
              function processNotificationTemplate(template) {
 
                 var scope = args.scope.$new();
