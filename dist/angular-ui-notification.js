@@ -23,7 +23,8 @@ angular.module('ui-notification').provider('Notification', function() {
         closeOnClick: true,
         maxCount: 0, // 0 - Infinite
         container: 'body',
-        priority: 10
+        priority: 10,
+        debug: true
     };
 
     this.setOptions = function(options) {
@@ -61,6 +62,11 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
+            args.debug = args.debug ? args.debug : options.debug;
+            
+            if (!args.debug) {
+                return;
+            }
             
             var template=$templateCache.get(args.template);
 
