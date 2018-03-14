@@ -129,6 +129,7 @@ The options list:
 | positionY         | "top", "bottom"           | "top"                          | Vertical position of the message                                         |
 | replaceMessage    | true, false               | false                          | If true every next appearing message replace old messages                |
 | templateUrl       | Any string                | "angular-ui-notification.html" | Custom template filename (URL)                                           |
+| template          | HTML template             | null                           | Custom template (DOM)                                                    |
 | onClose           | Any function              | undefined                      | Callback to execute when a notification element is closed. Callback receives the element as its argument. |
 | closeOnClick      | true, false               | true                           | If true, messages are closed on click                                    |
 | maxCount          | Any integer               | 0                              | Show only [maxCount] last messages. Old messages will be killed. 0 - do not kill |
