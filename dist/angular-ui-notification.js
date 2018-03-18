@@ -51,7 +51,6 @@ angular.module('ui-notification').provider('Notification', function() {
             }
 
             args.scope = args.scope ? args.scope : $rootScope;
-            args.template = args.templateUrl ? args.templateUrl : options.templateUrl;
             args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
             args.type = t || args.type || options.type ||  '';
             args.positionY = args.positionY ? args.positionY : options.positionY;
@@ -61,8 +60,12 @@ angular.module('ui-notification').provider('Notification', function() {
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
             args.container = args.container ? args.container : options.container;
             args.priority = args.priority ? args.priority : options.priority;
-            
-            var template=$templateCache.get(args.template);
+
+            var template = args.template;
+            if (template === null) {
+                args.template = args.templateUrl ? args.templateUrl : options.templateUrl;
+                template = $templateCache.get(args.template);
+            }
 
             if(template){
                 processNotificationTemplate(template);
@@ -75,11 +78,10 @@ angular.module('ui-notification').provider('Notification', function() {
                   })
                   .catch(function(data){
                     throw new Error('Template ('+args.template+') could not be loaded. ' + data);
-                  });                
-            }    
-            
-            
-             function processNotificationTemplate(template) {
+                  });
+            }
+
+            function processNotificationTemplate(template) {
 
                 var scope = args.scope.$new();
                 scope.message = $sce.trustAsHtml(args.message);
